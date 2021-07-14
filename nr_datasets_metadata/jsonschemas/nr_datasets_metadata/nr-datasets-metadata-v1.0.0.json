@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "DataSet": {
+      "id": "#dataset",
+      "title": "NR DataSet record v1.0.0",
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "../dataset-v2.0.0.json#/definitions/DataSet"
+        }
+      ]
+    }
+  }
+}

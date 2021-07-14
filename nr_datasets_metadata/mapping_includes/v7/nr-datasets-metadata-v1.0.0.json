@@ -1,0 +1,16 @@
+{
+  "aliases": {
+    "{PREFIX}nr-all": {},
+    "{PREFIX}nr-all-datasets": {}
+  },
+  "mappings": {
+    "date_detection": false,
+    "numeric_detection": false,
+    "dynamic": false,
+    "oarepo:extends": [
+      "dataset-v2.0.0.json#/DataSet"
+    ]
+  }
+}
+
+

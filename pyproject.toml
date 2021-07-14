@@ -1,0 +1,37 @@
+[tool]
+[tool.poetry]
+name = "techlib-nr-datasets-metadata"
+version = "1.0.0a1"
+description = "Czech National Repository theses data model."
+license = "MIT"
+keywords = ["Czech", "Nation", "Repository", "Invenio", "datasets"]
+classifiers = ["Environment :: Web Environment", "Intended Audience :: Developers", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent", "Programming Language :: Python", "Topic :: Internet :: WWW/HTTP :: Dynamic Content", "Topic :: Software Development :: Libraries :: Python Modules", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3.7", "Development Status :: 3 - Alpha"]
+authors = ["Miroslav Bauer <Miroslav.Bauer@cesnet.cz>"]
+readme = "README.md"
+packages = [{include='nr_datasets_metadata'}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+oarepo = "^3.3"
+oarepo-rdm-records = "^3.2.0"
+
+[tool.poetry.dev-dependencies]
+oarepo = "^3.3"
+oarepo-mapping-includes = "^1.4.4"
+oarepo-invenio-model = "^2.1.2"
+oarepo-multilingual = "^2.5.0"
+oarepo-taxonomies = "^3.0.0a4"
+oarepo-references = "^1.9.0"
+oarepo-validate = "^1.5.4"
+pytest = "^5.0.0"
+pytest-cov = "^2.10.1"
+pytest-runner = "^5.2"
+oarepo-fsm = "^1.5"
+
+[tool.poetry.plugins]
+
+[tool.poetry.plugins.'invenio_jsonschemas.schemas']
+'nr_datasets_metadata' = 'nr_datasets_metadata.jsonschemas'
+
+[tool.poetry.plugins.'oarepo_mapping_includes']
+'nr_datasets_metadata' = 'nr_datasets_metadata.mapping_includes'

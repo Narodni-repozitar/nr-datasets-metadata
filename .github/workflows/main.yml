@@ -50,7 +50,7 @@ jobs:
           "./run-tests.sh"
       - name: Push schemas
         if: github.ref == 'refs/heads/master'
-        run: "./push-schemas.sh"
+        run: "/bin/sh push-schemas.sh"
 #      - name: Coveralls
 #        uses: coverallsapp/github-action@master
 #        with:

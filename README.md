@@ -1,7 +1,7 @@
 # nr-datasets-metadata
 
-[![Build Status](https://travis-ci.org/Narodni-repozitar/nr-theses.svg?branch=master)](https://travis-ci.org/Narodni-repozitar/nr-theses)
-[![Coverage Status](https://coveralls.io/repos/github/Narodni-repozitar/nr-theses/badge.svg?branch=master)](https://coveralls.io/github/Narodni-repozitar/nr-theses?branch=master)
+[![Build Status](https://travis-ci.org/Narodni-repozitar/nr-datasets.svg?branch=master)](https://travis-ci.org/Narodni-repozitar/nr-datasets)
+[![Coverage Status](https://coveralls.io/repos/github/Narodni-repozitar/nr-datasets/badge.svg?branch=master)](https://coveralls.io/github/Narodni-repozitar/nr-datasets?branch=master)
 
 
 Disclaimer: The library is part of the Czech National Repository, and therefore the README is written in Czech.

@@ -18,7 +18,7 @@ oarepo-rdm-records = "^3.2.0"
 [tool.poetry.dev-dependencies]
 oarepo = "^3.3"
 oarepo-mapping-includes = "^1.4.4"
-oarepo-invenio-model = "^2.1.2"
+oarepo-invenio-model = "^2.2.0"
 oarepo-multilingual = "^2.5.0"
 oarepo-taxonomies = "^3.0.0a4"
 oarepo-references = "^1.9.0"
@@ -28,6 +28,7 @@ pytest-cov = "^2.10.1"
 pytest-runner = "^5.2"
 oarepo-fsm = "^1.5"
 marshmallow-utils = "<=0.4.0"
+oarepo-model-builder = "^0.1.6"
 
 [tool.poetry.plugins]
 
@@ -36,3 +37,6 @@ marshmallow-utils = "<=0.4.0"
 
 [tool.poetry.plugins.'oarepo_mapping_includes']
 'nr_datasets_metadata' = 'nr_datasets_metadata.mapping_includes'
+
+[tool.poetry.plugins.'oarepo_model_builder.datamodels']
+'nr_datasets_metadata' = 'nr_datasets_metadata.datamodels'

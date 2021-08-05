@@ -1,15 +1,832 @@
 {
+  "additionalProperties": false,
   "definitions": {
-    "DataSet": {
-      "id": "#dataset",
-      "title": "NR DataSet record v1.0.0",
-      "type": "object",
-      "additionalProperties": false,
-      "allOf": [
+    "GeoJSON-Geometry": {
+      "$id": "https://geojson.org/schema/Geometry.json",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "oneOf": [
         {
-          "$ref": "../dataset-v2.0.0.json#/definitions/DataSet"
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "Point"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON Point",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "type": "array"
+              },
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "LineString"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON LineString",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "minItems": 4,
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "Polygon"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON Polygon",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "MultiPoint"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON MultiPoint",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "items": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "minItems": 2,
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "MultiLineString"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON MultiLineString",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "bbox": {
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "type": "array"
+            },
+            "coordinates": {
+              "items": {
+                "items": {
+                  "items": {
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "type": "array"
+                  },
+                  "minItems": 4,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "MultiPolygon"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "title": "GeoJSON MultiPolygon",
+          "type": "object"
+        }
+      ],
+      "title": "GeoJSON Geometry"
+    },
+    "affiliations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "identifiers": {
+            "items": {
+              "$ref": "#/identifiers_with_scheme"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "agent": {
+      "description": "An agent (user, software process, community, ...).",
+      "oneOf": [
+        {
+          "$ref": "#/user"
         }
       ]
+    },
+    "contributorType": {
+      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+    },
+    "dateType": {
+      "description": "Type of the date.",
+      "type": "string"
+    },
+    "descriptionType": {
+      "type": "string"
+    },
+    "external-pid": {
+      "additionalProperties": false,
+      "description": "An external persistent identifier object.",
+      "properties": {
+        "client": {
+          "description": "Client identifier for the specific PID.",
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/identifier"
+        },
+        "provider": {
+          "description": "The provider of the persistent identifier.",
+          "type": "string"
+        },
+        "scheme": {
+          "$ref": "#/scheme"
+        }
+      },
+      "required": [
+        "identifier",
+        "provider"
+      ],
+      "type": "object"
+    },
+    "file": {
+      "additionalProperties": false,
+      "description": "A file object.",
+      "properties": {
+        "bucket_id": {
+          "description": "Object verison bucket ID.",
+          "type": "string"
+        },
+        "checksum": {
+          "description": "Checksum of the file.",
+          "type": "string"
+        },
+        "file_id": {
+          "$ref": "#/identifier"
+        },
+        "key": {
+          "description": "Key (filename) of the file.",
+          "type": "string"
+        },
+        "mimetype": {
+          "description": "File MIMEType.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the file in bytes.",
+          "type": "number"
+        },
+        "storage_class": {
+          "description": "File storage class.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "File URI.",
+          "type": "string"
+        },
+        "version_id": {
+          "description": "Object version ID.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "identifier": {
+      "description": "An identifier.",
+      "type": "string"
+    },
+    "identifiers": {
+      "additionalProperties": {
+        "$ref": "#/identifier"
+      },
+      "description": "Identifiers object (keys being scheme, value being the identifier).",
+      "type": "object"
+    },
+    "identifiers_with_scheme": {
+      "additionalProperties": false,
+      "description": "Identifiers object with identifier value and scheme in separate keys.",
+      "properties": {
+        "identifier": {
+          "$ref": "#/identifier"
+        },
+        "scheme": {
+          "$ref": "#/scheme"
+        }
+      },
+      "type": "object"
+    },
+    "identifiers_with_status": {
+      "additionalProperties": false,
+      "description": "Identifiers object with identifier value, scheme and status field.",
+      "properties": {
+        "identifier": {
+          "$ref": "#/identifier"
+        },
+        "scheme": {
+          "$ref": "#/scheme"
+        },
+        "status": {
+          "description": "Status of an identifier (e.g. requested, registered,...)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "internal-pid": {
+      "additionalProperties": false,
+      "description": "An internal persistent identifier object.",
+      "properties": {
+        "obj_type": {
+          "description": "The type of the associated object.",
+          "type": "string"
+        },
+        "pid_type": {
+          "description": "The type of the persistent identifier.",
+          "type": "string"
+        },
+        "pk": {
+          "description": "Primary key of the PID object.",
+          "type": "integer"
+        },
+        "status": {
+          "description": "The status of the PID (from Invenio-PIDStore).",
+          "enum": [
+            "N",
+            "K",
+            "R",
+            "M",
+            "D"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "pk",
+        "status"
+      ],
+      "type": "object"
+    },
+    "language": {
+      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "description": "ISO 639-2 B language code, i.e. code for a language in English."
+    },
+    "latitude": {
+      "maximum": 90,
+      "minimum": -90,
+      "type": "number"
+    },
+    "longitude": {
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number"
+    },
+    "nameType": {
+      "description": "Type of name.",
+      "enum": [
+        "personal",
+        "organizational"
+      ],
+      "type": "string"
+    },
+    "person_or_org": {
+      "additionalProperties": false,
+      "properties": {
+        "family_name": {
+          "type": "string"
+        },
+        "given_name": {
+          "type": "string"
+        },
+        "identifiers": {
+          "items": {
+            "$ref": "#/identifiers_with_scheme"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/nameType"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "relationType": {
+      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "description": "Type of relation to described object."
+    },
+    "resource_type": {
+      "additionalProperties": false,
+      "description": "A resource type.",
+      "properties": {
+        "subtype": {
+          "description": "The specific resource type identifier.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+          "description": "The general resource type."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "scheme": {
+      "description": "A scheme.",
+      "type": "string"
+    },
+    "titleType": {
+      "description": "Type of title.",
+      "type": "string"
+    },
+    "user": {
+      "additionalProperties": false,
+      "description": "..",
+      "properties": {
+        "user": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
     }
-  }
+  },
+  "properties": {
+    "$schema": {
+      "description": "JSONSchema id of the record",
+      "type": "string"
+    },
+    "_bucket": {
+      "description": "UUID of the internal files deposit bucket.",
+      "type": "string"
+    },
+    "_files": {
+      "description": "Describes information needed for files in records.",
+      "items": {
+        "additionalProperties": true,
+        "description": "Describes the information of a single file in the record.",
+        "properties": {
+          "bucket": {
+            "description": "UUID of the bucket to which this file is assigned.",
+            "type": "string"
+          },
+          "checksum": {
+            "description": "Checksum the file. Starts with '<algorithm>:' prefix, e.g.: 'md5:1234abcd...'",
+            "type": "string"
+          },
+          "file_id": {
+            "description": "UUID of the FileInstance object.",
+            "type": "string"
+          },
+          "key": {
+            "description": "Key (filename) of the file.",
+            "type": "string"
+          },
+          "size": {
+            "description": "Size of the file in bytes.",
+            "type": "integer"
+          },
+          "version_id": {
+            "description": "UUID of the ObjectVersion object.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "abstract": {
+      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+      "description": "Multilingual abstract description for record (may contain HTML)."
+    },
+    "access": {
+      "additionalProperties": false,
+      "description": "Record access control and ownership.",
+      "properties": {
+        "embargo": {
+          "additionalProperties": false,
+          "description": "Description of the embargo on the record.",
+          "properties": {
+            "active": {
+              "description": "Whether or not the embargo is (still) active.",
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "reason": {
+              "description": "The reason why the record is under embargo.",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "until": {
+              "description": "Embargo date of record (ISO8601 formatted date time in UTC). At this time both metadata and files will be made public.",
+              "format": "date",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "files": {
+          "description": "Files visibility (public or restricted)",
+          "enum": [
+            "public",
+            "restricted"
+          ],
+          "type": "string"
+        },
+        "owned_by": {
+          "description": "List of owners of the record.",
+          "items": {
+            "$ref": "#agent"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "record": {
+          "description": "Record visibility (public or restricted)",
+          "enum": [
+            "public",
+            "restricted"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "additional_descriptions": {
+      "description": "Multilingual list of additional descriptions of the resource",
+      "items": {
+        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+      },
+      "type": "array"
+    },
+    "additional_titles": {
+      "description": "Additional record (multilingual) titles.",
+      "items": {
+        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+      },
+      "type": "array"
+    },
+    "contributors": {
+      "description": "Contributors in order of importance.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "affiliations": {
+            "$ref": "#/affiliations"
+          },
+          "person_or_org": {
+            "$ref": "#/person_or_org"
+          },
+          "role": {
+            "$ref": "#/contributorType"
+          }
+        },
+        "required": [
+          "person_or_org",
+          "role"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "creator": {
+      "default": "Current authenticated user's e-mail or 'anonymous'",
+      "description": "User/agent that created the repository record for the resource",
+      "type": "string"
+    },
+    "creators": {
+      "description": "Authors of the resource.",
+      "items": {
+        "additionalProperties": false,
+        "description": "Resource creator metadata. Role is a taxonomy field: [contributor-type](https://oarepo.github.io/publications-api/taxonomies/#ContributorType)",
+        "properties": {
+          "affiliations": {
+            "$ref": "#/affiliations"
+          },
+          "person_or_org": {
+            "$ref": "#/person_or_org"
+          },
+          "role": {
+            "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+          }
+        },
+        "required": [
+          "person_or_org"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "dates": {
+      "description": "Date or date intervals.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "description": "Date or date interval in EDTF level 0 format",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the date or date interval e.g. 'Accepted' or 'Available' (CV).",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/dateType"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "id": {
+      "description": "Primary Invenio record identifier.",
+      "type": "string"
+    },
+    "identifiers": {
+      "description": "Alternate identifiers for the record.",
+      "items": {
+        "$ref": "#/identifiers_with_status"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "keywords": {
+      "description": "Free-form keywords, often created by author(s)",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "languages": {
+      "$ref": "#/language",
+      "description": "The primary languages of the resource. Taxonomy field: [languages](https://oarepo.github.io/publications-api/taxonomies/#Languages).",
+      "minItems": 1
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "pids": {
+      "description": "External persistent identifiers for a record including e.g. OAI-PMH identifier, minted DOIs and more. PIDs are registered in the PIDStore.",
+      "items": {
+        "additionalProperties": {
+          "$ref": "#/external-pid"
+        },
+        "type": "object"
+      },
+      "type": "object",
+      "uniqueItems": true
+    },
+    "publication_date": {
+      "description": "Record publication date (EDTF level 0 format).",
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "references": {
+      "description": "List of references to another resources",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "identifier": {
+            "$ref": "#/identifier"
+          },
+          "reference": {
+            "description": "A reference string.",
+            "type": "string"
+          },
+          "scheme": {
+            "$ref": "#/scheme"
+          }
+        },
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "related_identifiers": {
+      "description": "List of identifiers related to this resource",
+      "items": {
+        "additionalProperties": false,
+        "description": "Related identifier definition. Resource_type and relation_type are taxonomy fields: [see Taxonomies](https://oarepo.github.io/publications-api/taxonomies/)",
+        "properties": {
+          "identifier": {
+            "$ref": "#/identifier"
+          },
+          "relation_type": {
+            "$ref": "#/relationType"
+          },
+          "resource_type": {
+            "$ref": "#/resource_type"
+          },
+          "scheme": {
+            "$ref": "#/scheme"
+          }
+        },
+        "required": [
+          "identifier",
+          "scheme",
+          "relation_type"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "resource_type": {
+      "$ref": "#/resource_type"
+    },
+    "rights": {
+      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "description": "Any license or copyright information for this resource. Taxonomy field: [licenses](https://oarepo.github.io/publications-api/taxonomies/#Licenses)"
+    },
+    "subjects": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "identifier": {
+            "$ref": "#/identifier"
+          },
+          "scheme": {
+            "$ref": "#/scheme"
+          },
+          "subject": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "subject"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "title": {
+      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+      "description": "Primary (multilingual) title of the record."
+    },
+    "version": {
+      "description": "Record version tag.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "publication_date",
+    "abstract"
+  ],
+  "title": "NR DataSet record v1.0.0",
+  "type": "object"
 }

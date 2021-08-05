@@ -1127,7 +1127,7 @@ all = ["Sphinx (>=3)", "cachelib (>=0.1)", "pytest-invenio (>=1.4.1)", "redis (>
 docs = ["Sphinx (>=3)"]
 mysql = ["invenio-db[mysql,versioning] (>=1.0.8)"]
 postgresql = ["invenio-db[postgresql,versioning] (>=1.0.8)"]
-sqlite = ["invenio-db[sqlite,versioning] (>=1.0.8)"]
+sqlite = ["invenio-db[versioning,sqlite] (>=1.0.8)"]
 tests = ["cachelib (>=0.1)", "pytest-invenio (>=1.4.1)", "redis (>=2.10.5)"]
 
 [[package]]
@@ -1744,9 +1744,9 @@ invenio-pidstore = ">=1.2.0"
 invenio-records = ">=1.0.0"
 
 [package.extras]
-all = ["Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.2.0)", "invenio-db[mysql,postgresql,versioning] (>=1.0.0)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
+all = ["Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.2.0)", "invenio-db[postgresql,mysql,versioning] (>=1.0.0)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
 docs = ["Sphinx (>=1.5.1)"]
-tests = ["check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.2.0)", "invenio-db[mysql,postgresql,versioning] (>=1.0.0)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
+tests = ["check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.2.0)", "invenio-db[postgresql,mysql,versioning] (>=1.0.0)", "isort (>=4.2.2)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=2.8.0)"]
 
 [[package]]
 name = "invenio-rest"
@@ -2605,7 +2605,7 @@ tests = ["requests-mock", "oarepo"]
 
 [[package]]
 name = "oarepo-model-builder"
-version = "0.1.6"
+version = "0.1.7"
 description = "An utility library that generates OARepo required data model files from a JSON specification file"
 category = "dev"
 optional = false
@@ -2621,19 +2621,18 @@ tomlkit = ">=0.7.2,<0.8.0"
 
 [[package]]
 name = "oarepo-multilingual"
-version = "2.5.0"
+version = "2.6.0"
 description = "Multilingual support for OARepo"
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-flask = "*"
-marshmallow = "*"
 pycountry = "*"
 
 [package.extras]
-tests = ["pytest-invenio[docs] (==1.3.4)", "oarepo-mapping-includes", "oarepo"]
+build = ["oarepo-model-builder"]
+tests = ["oarepo-mapping-includes", "oarepo"]
 
 [[package]]
 name = "oarepo-rdm-records"
@@ -3539,7 +3538,7 @@ timezone = ["python-dateutil"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "216caaff144f78fc6e4bddc544b147117e362278fb1b56a39adb062a630bdf47"
+content-hash = "38ae10753bf7e3cc2df7cc2e051830fe320b5bd27a9593038ee5e143ba9e682c"
 
 [metadata.files]
 alembic = [
@@ -4371,12 +4370,12 @@ oarepo-mapping-includes = [
     {file = "oarepo_mapping_includes-1.4.4-py3-none-any.whl", hash = "sha256:b0b8a091854eaad23a5de462c0a0fa273784cfb13959a7f997e11851d95a40fb"},
 ]
 oarepo-model-builder = [
-    {file = "oarepo-model-builder-0.1.6.tar.gz", hash = "sha256:d427b1cddc8a3e26ac885a3b08c205d776ef72e72e3727ce00f69490fd550473"},
-    {file = "oarepo_model_builder-0.1.6-py3-none-any.whl", hash = "sha256:71aede0199a88088d6aae4cc579cc7efc9c475de46fc3473bc3f69ed5a7ba181"},
+    {file = "oarepo-model-builder-0.1.7.tar.gz", hash = "sha256:869af4df91e5cee4d75e48286a532af39949ecbbf7af7f4285ca031f99c438ae"},
+    {file = "oarepo_model_builder-0.1.7-py3-none-any.whl", hash = "sha256:dc755594d3535ef44be96fd73a0885cf38bbc7523138e785bcdd73466446fb14"},
 ]
 oarepo-multilingual = [
-    {file = "oarepo_multilingual-2.5.0-py3-none-any.whl", hash = "sha256:7d37893ec8dbf8ad157c029a02cf15fffa507adb745de1bc0a6fe903a9729a2e"},
-    {file = "oarepo_multilingual-2.5.0.tar.gz", hash = "sha256:9eb079087e74e40b7e74854696fbe30235815c339c1f6bd493d725aa4e98ee45"},
+    {file = "oarepo_multilingual-2.6.0-py3-none-any.whl", hash = "sha256:ed197d31c35f3fb4a9af12e445b1b2ff598616b01c2570786b450656f6368036"},
+    {file = "oarepo_multilingual-2.6.0.tar.gz", hash = "sha256:7e50df954d436cb8cdf5cca04b41cd92f6e8d7393281cce6ac3b522305a0e753"},
 ]
 oarepo-rdm-records = [
     {file = "oarepo_rdm_records-3.2.0-py3-none-any.whl", hash = "sha256:7218b7accdd085d176fa2c25dda113217d769d852d666328268458210e610017"},

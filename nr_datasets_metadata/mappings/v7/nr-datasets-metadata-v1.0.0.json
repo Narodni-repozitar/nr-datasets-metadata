@@ -35,7 +35,7 @@
         "type": "object"
       },
       "abstract": {
-        "type": "keyword"
+        "type": "multilingual"
       },
       "access": {
         "properties": {
@@ -66,10 +66,10 @@
         "type": "object"
       },
       "additional_descriptions": {
-        "type": "keyword"
+        "type": "multilingual"
       },
       "additional_titles": {
-        "type": "keyword"
+        "type": "multilingual"
       },
       "contributors": {
         "properties": {
@@ -192,7 +192,7 @@
         "type": "object"
       },
       "title": {
-        "type": "keyword"
+        "type": "multilingual"
       },
       "version": {
         "type": "keyword"

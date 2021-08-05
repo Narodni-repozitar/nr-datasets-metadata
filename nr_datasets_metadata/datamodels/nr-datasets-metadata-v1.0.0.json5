@@ -2,9 +2,11 @@
   "title": "NR DataSet record v1.0.0",
   "type": "object",
   "additionalProperties": false,
-  "oarepo:type": [
+  "oarepo:use": [
     "nr-datasets-definitions-v1.0.0",
-    "invenio-record-v1.0.0"
+    "invenio-record-v1.0.0",
+    "multilingual-v2.0.0",
+    "taxonomy-v2.0.0"
   ],
   "properties": {
     "keywords": {
@@ -116,7 +118,7 @@
             "$ref": "#/person_or_org"
           },
           "role": {
-            "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+            "$ref": "#/Term"
           },
           "affiliations": {
             "$ref": "#/affiliations"
@@ -126,13 +128,15 @@
     },
     "title": {
       "description": "Primary (multilingual) title of the record.",
-      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+      "oarepo:search": "multilingual",
+      "$ref": "#/multilingual"
     },
     "additional_titles": {
       "description": "Additional record (multilingual) titles.",
       "type": "array",
       "items": {
-        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+        "oarepo:search": "multilingual",
+        "$ref": "#/multilingual"
       }
     },
     "publisher": {
@@ -256,17 +260,19 @@
     },
     "rights": {
       "description": "Any license or copyright information for this resource. Taxonomy field: [licenses](https://oarepo.github.io/publications-api/taxonomies/#Licenses)",
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+      "$ref": "#/Term"
     },
     "abstract": {
       "description": "Multilingual abstract description for record (may contain HTML).",
-      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+      "oarepo:search": "multilingual",
+      "$ref": "#/multilingual"
     },
     "additional_descriptions": {
       "type": "array",
       "description": "Multilingual list of additional descriptions of the resource",
       "items": {
-        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+        "oarepo:search": "multilingual",
+        "$ref": "#/multilingual"
       }
     },
     "references": {

@@ -416,6 +416,22 @@
       "minimum": -180,
       "type": "number"
     },
+    "multilingual": {
+      "$id": "#multilingual",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z]$": {
+          "type": "string"
+        },
+        "^[a-z][a-z]-[a-z][a-z]$": {
+          "type": "string"
+        },
+        "^_$": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "nameType": {
       "description": "Type of name.",
       "enum": [
@@ -538,7 +554,7 @@
       "type": "array"
     },
     "abstract": {
-      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+      "$ref": "#/multilingual",
       "description": "Multilingual abstract description for record (may contain HTML)."
     },
     "access": {
@@ -604,14 +620,14 @@
     "additional_descriptions": {
       "description": "Multilingual list of additional descriptions of the resource",
       "items": {
-        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+        "$ref": "#/multilingual"
       },
       "type": "array"
     },
     "additional_titles": {
       "description": "Additional record (multilingual) titles.",
       "items": {
-        "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+        "$ref": "#/multilingual"
       },
       "type": "array"
     },
@@ -814,7 +830,7 @@
       "type": "array"
     },
     "title": {
-      "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+      "$ref": "#/multilingual",
       "description": "Primary (multilingual) title of the record."
     },
     "version": {

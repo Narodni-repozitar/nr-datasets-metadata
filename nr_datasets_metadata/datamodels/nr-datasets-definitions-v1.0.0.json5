@@ -13,7 +13,7 @@
       "type": "string"
     },
     "contributorType": {
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+      "$ref": "#/definitions/Term"
     },
     "dateType": {
       "description": "Type of the date.",
@@ -21,14 +21,14 @@
     },
     "relationType": {
       "description": "Type of relation to described object.",
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+      "$ref": "#/definitions/Term"
     },
     "descriptionType": {
       "type": "string"
     },
     "language": {
       "description": "ISO 639-2 B language code, i.e. code for a language in English.",
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+      "$ref": "#/definitions/Term"
     },
     "longitude": {
       "type": "number",
@@ -52,7 +52,7 @@
       "description": "Identifiers object (keys being scheme, value being the identifier).",
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/identifier"
+        "$ref": "#/definitions/identifier"
       }
     },
     "identifiers_with_status": {
@@ -61,10 +61,10 @@
       "additionalProperties": false,
       "properties": {
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         },
         "status": {
           "description": "Status of an identifier (e.g. requested, registered,...)",
@@ -78,10 +78,10 @@
       "additionalProperties": false,
       "properties": {
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         }
       }
     },
@@ -129,10 +129,10 @@
       ],
       "properties": {
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         },
         "provider": {
           "description": "The provider of the persistent identifier.",
@@ -151,7 +151,7 @@
       "properties": {
         "type": {
           "description": "The general resource type.",
-          "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+          "$ref": "#/definitions/Term"
         },
         "subtype": {
           "description": "The specific resource type identifier.",
@@ -173,7 +173,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/nameType"
+          "$ref": "#/definitions/nameType"
         },
         "given_name": {
           "type": "string"
@@ -184,7 +184,7 @@
         "identifiers": {
           "type": "array",
           "items": {
-            "$ref": "#/identifiers_with_scheme"
+            "$ref": "#/definitions/identifiers_with_scheme"
           },
           "uniqueItems": true
         }
@@ -203,7 +203,7 @@
           "identifiers": {
             "type": "array",
             "items": {
-              "$ref": "#/identifiers_with_scheme"
+              "$ref": "#/definitions/identifiers_with_scheme"
             },
             "uniqueItems": true
           }
@@ -251,7 +251,7 @@
           "type": "string"
         },
         "file_id": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         }
       }
     },
@@ -269,7 +269,7 @@
       "description": "An agent (user, software process, community, ...).",
       "oneOf": [
         {
-          "$ref": "#/user"
+          "$ref": "#/definitions/user"
         }
       ]
     },

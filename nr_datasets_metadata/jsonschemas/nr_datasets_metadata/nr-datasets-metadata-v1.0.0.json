@@ -219,13 +219,23 @@
       ],
       "title": "GeoJSON Geometry"
     },
+    "Term": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "TermArray": {
+      "$ref": "#/definitions/Term"
+    },
     "affiliations": {
       "items": {
         "additionalProperties": false,
         "properties": {
           "identifiers": {
             "items": {
-              "$ref": "#/identifiers_with_scheme"
+              "$ref": "#/definitions/identifiers_with_scheme"
             },
             "type": "array",
             "uniqueItems": true
@@ -246,12 +256,12 @@
       "description": "An agent (user, software process, community, ...).",
       "oneOf": [
         {
-          "$ref": "#/user"
+          "$ref": "#/definitions/user"
         }
       ]
     },
     "contributorType": {
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+      "$ref": "#/definitions/Term"
     },
     "dateType": {
       "description": "Type of the date.",
@@ -269,14 +279,14 @@
           "type": "string"
         },
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "provider": {
           "description": "The provider of the persistent identifier.",
           "type": "string"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         }
       },
       "required": [
@@ -298,7 +308,7 @@
           "type": "string"
         },
         "file_id": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "key": {
           "description": "Key (filename) of the file.",
@@ -333,7 +343,7 @@
     },
     "identifiers": {
       "additionalProperties": {
-        "$ref": "#/identifier"
+        "$ref": "#/definitions/identifier"
       },
       "description": "Identifiers object (keys being scheme, value being the identifier).",
       "type": "object"
@@ -343,10 +353,10 @@
       "description": "Identifiers object with identifier value and scheme in separate keys.",
       "properties": {
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         }
       },
       "type": "object"
@@ -356,10 +366,10 @@
       "description": "Identifiers object with identifier value, scheme and status field.",
       "properties": {
         "identifier": {
-          "$ref": "#/identifier"
+          "$ref": "#/definitions/identifier"
         },
         "scheme": {
-          "$ref": "#/scheme"
+          "$ref": "#/definitions/scheme"
         },
         "status": {
           "description": "Status of an identifier (e.g. requested, registered,...)",
@@ -403,7 +413,7 @@
       "type": "object"
     },
     "language": {
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "$ref": "#/definitions/Term",
       "description": "ISO 639-2 B language code, i.e. code for a language in English."
     },
     "latitude": {
@@ -451,7 +461,7 @@
         },
         "identifiers": {
           "items": {
-            "$ref": "#/identifiers_with_scheme"
+            "$ref": "#/definitions/identifiers_with_scheme"
           },
           "type": "array",
           "uniqueItems": true
@@ -460,7 +470,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/nameType"
+          "$ref": "#/definitions/nameType"
         }
       },
       "required": [
@@ -469,7 +479,7 @@
       "type": "object"
     },
     "relationType": {
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "$ref": "#/definitions/Term",
       "description": "Type of relation to described object."
     },
     "resource_type": {
@@ -481,7 +491,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+          "$ref": "#/definitions/Term",
           "description": "The general resource type."
         }
       },
@@ -554,7 +564,7 @@
       "type": "array"
     },
     "abstract": {
-      "$ref": "#/multilingual",
+      "$ref": "#/definitions/multilingual",
       "description": "Multilingual abstract description for record (may contain HTML)."
     },
     "access": {
@@ -601,7 +611,7 @@
         "owned_by": {
           "description": "List of owners of the record.",
           "items": {
-            "$ref": "#agent"
+            "$ref": "#/definitions/agent"
           },
           "type": "array",
           "uniqueItems": true
@@ -620,14 +630,14 @@
     "additional_descriptions": {
       "description": "Multilingual list of additional descriptions of the resource",
       "items": {
-        "$ref": "#/multilingual"
+        "$ref": "#/definitions/multilingual"
       },
       "type": "array"
     },
     "additional_titles": {
       "description": "Additional record (multilingual) titles.",
       "items": {
-        "$ref": "#/multilingual"
+        "$ref": "#/definitions/multilingual"
       },
       "type": "array"
     },
@@ -637,13 +647,13 @@
         "additionalProperties": false,
         "properties": {
           "affiliations": {
-            "$ref": "#/affiliations"
+            "$ref": "#/definitions/affiliations"
           },
           "person_or_org": {
-            "$ref": "#/person_or_org"
+            "$ref": "#/definitions/person_or_org"
           },
           "role": {
-            "$ref": "#/contributorType"
+            "$ref": "#/definitions/contributorType"
           }
         },
         "required": [
@@ -666,13 +676,13 @@
         "description": "Resource creator metadata. Role is a taxonomy field: [contributor-type](https://oarepo.github.io/publications-api/taxonomies/#ContributorType)",
         "properties": {
           "affiliations": {
-            "$ref": "#/affiliations"
+            "$ref": "#/definitions/affiliations"
           },
           "person_or_org": {
-            "$ref": "#/person_or_org"
+            "$ref": "#/definitions/person_or_org"
           },
           "role": {
-            "$ref": "taxonomy-v2.0.0.json#/definitions/Term"
+            "$ref": "#/definitions/Term"
           }
         },
         "required": [
@@ -696,7 +706,7 @@
             "type": "string"
           },
           "type": {
-            "$ref": "#/dateType"
+            "$ref": "#/definitions/dateType"
           }
         },
         "type": "object"
@@ -710,7 +720,7 @@
     "identifiers": {
       "description": "Alternate identifiers for the record.",
       "items": {
-        "$ref": "#/identifiers_with_status"
+        "$ref": "#/definitions/identifiers_with_status"
       },
       "type": "array",
       "uniqueItems": true
@@ -723,7 +733,7 @@
       "type": "array"
     },
     "languages": {
-      "$ref": "#/language",
+      "$ref": "#/definitions/language",
       "description": "The primary languages of the resource. Taxonomy field: [languages](https://oarepo.github.io/publications-api/taxonomies/#Languages).",
       "minItems": 1
     },
@@ -737,7 +747,7 @@
       "description": "External persistent identifiers for a record including e.g. OAI-PMH identifier, minted DOIs and more. PIDs are registered in the PIDStore.",
       "items": {
         "additionalProperties": {
-          "$ref": "#/external-pid"
+          "$ref": "#/definitions/external-pid"
         },
         "type": "object"
       },
@@ -757,14 +767,14 @@
         "additionalProperties": false,
         "properties": {
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "reference": {
             "description": "A reference string.",
             "type": "string"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           }
         },
         "type": "object"
@@ -779,16 +789,16 @@
         "description": "Related identifier definition. Resource_type and relation_type are taxonomy fields: [see Taxonomies](https://oarepo.github.io/publications-api/taxonomies/)",
         "properties": {
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "relation_type": {
-            "$ref": "#/relationType"
+            "$ref": "#/definitions/relationType"
           },
           "resource_type": {
-            "$ref": "#/resource_type"
+            "$ref": "#/definitions/resource_type"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           }
         },
         "required": [
@@ -802,10 +812,10 @@
       "uniqueItems": true
     },
     "resource_type": {
-      "$ref": "#/resource_type"
+      "$ref": "#/definitions/resource_type"
     },
     "rights": {
-      "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+      "$ref": "#/definitions/Term",
       "description": "Any license or copyright information for this resource. Taxonomy field: [licenses](https://oarepo.github.io/publications-api/taxonomies/#Licenses)"
     },
     "subjects": {
@@ -813,10 +823,10 @@
         "additionalProperties": false,
         "properties": {
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           },
           "subject": {
             "type": "string"
@@ -830,7 +840,7 @@
       "type": "array"
     },
     "title": {
-      "$ref": "#/multilingual",
+      "$ref": "#/definitions/multilingual",
       "description": "Primary (multilingual) title of the record."
     },
     "version": {

@@ -26,7 +26,7 @@
           "type": "array",
           "uniqueItems": true,
           "items": {
-            "$ref": "#agent"
+            "$ref": "#/definitions/agent"
           },
         },
         "record": {
@@ -90,13 +90,13 @@
       "items": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/external-pid"
+          "$ref": "#/definitions/external-pid"
         }
       },
       "uniqueItems": true
     },
     "resource_type": {
-      "$ref": "#/resource_type"
+      "$ref": "#/definitions/resource_type"
     },
     "creator": {
       "description": "User/agent that created the repository record for the resource",
@@ -115,13 +115,13 @@
         ],
         "properties": {
           "person_or_org": {
-            "$ref": "#/person_or_org"
+            "$ref": "#/definitions/person_or_org"
           },
           "role": {
-            "$ref": "#/Term"
+            "$ref": "#/definitions/Term"
           },
           "affiliations": {
-            "$ref": "#/affiliations"
+            "$ref": "#/definitions/affiliations"
           }
         }
       }
@@ -129,14 +129,14 @@
     "title": {
       "description": "Primary (multilingual) title of the record.",
       "oarepo:search": "multilingual",
-      "$ref": "#/multilingual"
+      "$ref": "#/definitions/multilingual"
     },
     "additional_titles": {
       "description": "Additional record (multilingual) titles.",
       "type": "array",
       "items": {
         "oarepo:search": "multilingual",
-        "$ref": "#/multilingual"
+        "$ref": "#/definitions/multilingual"
       }
     },
     "publisher": {
@@ -157,10 +157,10 @@
             "type": "string",
           },
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           }
         },
         "required": [
@@ -176,13 +176,13 @@
         "additionalProperties": false,
         "properties": {
           "person_or_org": {
-            "$ref": "#/person_or_org"
+            "$ref": "#/definitions/person_or_org"
           },
           "role": {
-            "$ref": "#/contributorType"
+            "$ref": "#/definitions/contributorType"
           },
           "affiliations": {
-            "$ref": "#/affiliations"
+            "$ref": "#/definitions/affiliations"
           }
         },
         "required": [
@@ -203,7 +203,7 @@
             "type": "string"
           },
           "type": {
-            "$ref": "#/dateType"
+            "$ref": "#/definitions/dateType"
           },
           "description": {
             "description": "Description of the date or date interval e.g. 'Accepted' or 'Available' (CV).",
@@ -214,14 +214,14 @@
     },
     "languages": {
       "description": "The primary languages of the resource. Taxonomy field: [languages](https://oarepo.github.io/publications-api/taxonomies/#Languages).",
-      "$ref": "#/language",
+      "$ref": "#/definitions/language",
       "minItems": 1
     },
     "identifiers": {
       "description": "Alternate identifiers for the record.",
       "type": "array",
       "items": {
-        "$ref": "#/identifiers_with_status"
+        "$ref": "#/definitions/identifiers_with_status"
       },
       "uniqueItems": true
     },
@@ -235,16 +235,16 @@
         "additionalProperties": false,
         "properties": {
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           },
           "relation_type": {
-            "$ref": "#/relationType"
+            "$ref": "#/definitions/relationType"
           },
           "resource_type": {
-            "$ref": "#/resource_type"
+            "$ref": "#/definitions/resource_type"
           }
         },
         "required": [
@@ -260,19 +260,19 @@
     },
     "rights": {
       "description": "Any license or copyright information for this resource. Taxonomy field: [licenses](https://oarepo.github.io/publications-api/taxonomies/#Licenses)",
-      "$ref": "#/Term"
+      "$ref": "#/definitions/Term"
     },
     "abstract": {
       "description": "Multilingual abstract description for record (may contain HTML).",
       "oarepo:search": "multilingual",
-      "$ref": "#/multilingual"
+      "$ref": "#/definitions/multilingual"
     },
     "additional_descriptions": {
       "type": "array",
       "description": "Multilingual list of additional descriptions of the resource",
       "items": {
         "oarepo:search": "multilingual",
-        "$ref": "#/multilingual"
+        "$ref": "#/definitions/multilingual"
       }
     },
     "references": {
@@ -288,10 +288,10 @@
             "description": "A reference string."
           },
           "identifier": {
-            "$ref": "#/identifier"
+            "$ref": "#/definitions/identifier"
           },
           "scheme": {
-            "$ref": "#/scheme"
+            "$ref": "#/definitions/scheme"
           }
         }
       }

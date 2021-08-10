@@ -9,4 +9,4 @@
 
 cd nr_datasets_metadata
 
-models build -c datamodels/config.json5 datamodels/nr-datasets-metadata-v1.0.0.json5
+models build datamodels/nr-datasets-metadata-v1.0.0.json5

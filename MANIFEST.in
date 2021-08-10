@@ -18,4 +18,4 @@ include .editorconfig
 prune docs/_build
 recursive-include nr_datasets *.po *.pot *.mo
 graft nr_datasets_metadata
-include nr_datasets_metadata/datamodel.json5
+recursive-include nr_datasets_metadata *.json5

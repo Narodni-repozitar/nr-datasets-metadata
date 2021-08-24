@@ -1,0 +1,241 @@
+{
+  "aliases": {
+    "{PREFIX}nr-all": {},
+    "{PREFIX}nr-all-datasets": {}
+  },
+  "mappings": {
+    "properties": {
+      "$schema": {
+        "type": "keyword"
+      },
+      "_bucket": {
+        "type": "keyword"
+      },
+      "_files": {
+        "properties": {
+          "bucket": {
+            "type": "keyword"
+          },
+          "checksum": {
+            "type": "keyword"
+          },
+          "file_id": {
+            "type": "keyword"
+          },
+          "key": {
+            "type": "keyword"
+          },
+          "size": {
+            "type": "keyword"
+          },
+          "version_id": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "abstract": {
+        "type": "multilingual"
+      },
+      "access": {
+        "properties": {
+          "embargo": {
+            "properties": {
+              "active": {
+                "type": "keyword"
+              },
+              "reason": {
+                "type": "keyword"
+              },
+              "until": {
+                "type": "keyword"
+              }
+            },
+            "type": "object"
+          },
+          "files": {
+            "type": "keyword"
+          },
+          "owned_by": {
+            "type": "keyword"
+          },
+          "record": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "additional_descriptions": {
+        "type": "multilingual"
+      },
+      "additional_titles": {
+        "type": "multilingual"
+      },
+      "contributors": {
+        "properties": {
+          "affiliations": {
+            "type": "keyword"
+          },
+          "person_or_org": {
+            "type": "keyword"
+          },
+          "role": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "creator": {
+        "type": "keyword"
+      },
+      "creators": {
+        "properties": {
+          "affiliations": {
+            "type": "keyword"
+          },
+          "person_or_org": {
+            "type": "keyword"
+          },
+          "role": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "dates": {
+        "properties": {
+          "date": {
+            "type": "keyword"
+          },
+          "description": {
+            "type": "keyword"
+          },
+          "type": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "id": {
+        "type": "keyword"
+      },
+      "identifiers": {
+        "type": "keyword"
+      },
+      "keywords": {
+        "type": "keyword"
+      },
+      "languages": {
+        "type": "keyword"
+      },
+      "notes": {
+        "type": "keyword"
+      },
+      "pids": {
+        "type": "keyword"
+      },
+      "publication_date": {
+        "type": "keyword"
+      },
+      "publisher": {
+        "type": "keyword"
+      },
+      "references": {
+        "properties": {
+          "identifier": {
+            "type": "keyword"
+          },
+          "reference": {
+            "type": "keyword"
+          },
+          "scheme": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "related_identifiers": {
+        "properties": {
+          "identifier": {
+            "type": "keyword"
+          },
+          "relation_type": {
+            "type": "keyword"
+          },
+          "resource_type": {
+            "type": "keyword"
+          },
+          "scheme": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "resource_type": {
+        "type": "keyword"
+      },
+      "rights": {
+        "type": "keyword"
+      },
+      "subjects": {
+        "properties": {
+          "identifier": {
+            "type": "keyword"
+          },
+          "scheme": {
+            "type": "keyword"
+          },
+          "subject": {
+            "type": "keyword"
+          }
+        },
+        "type": "object"
+      },
+      "title": {
+        "type": "multilingual"
+      },
+      "version": {
+        "type": "keyword"
+      }
+    },
+    "type": "object"
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "filter": [
+            "lowercase",
+            "czech_stop",
+            "czech_stemmer"
+          ],
+          "tokenizer": "standard"
+        }
+      },
+      "char_filter": {
+        "configured_html_strip": {
+          "escaped_tags": [],
+          "type": "html_strip"
+        }
+      },
+      "filter": {
+        "czech_stemmer": {
+          "language": "czech",
+          "type": "stemmer"
+        },
+        "czech_stop": {
+          "stopwords": "_czech_",
+          "type": "stop"
+        }
+      },
+      "normalizer": {
+        "wsnormalizer": {
+          "filter": [
+            "trim"
+          ],
+          "type": "custom"
+        }
+      }
+    }
+  }
+}

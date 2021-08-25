@@ -1,0 +1,12 @@
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "these": {
+            "$ref": "https://narodni-repozitar.cz/schemas/nr_datasets_metadata/nr-datasets-metadata-v2.0.0.json#/definitions/DataSet"
+      }
+  }
+
+}

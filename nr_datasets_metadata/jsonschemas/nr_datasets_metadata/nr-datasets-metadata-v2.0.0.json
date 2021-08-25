@@ -1,5 +1,193 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "authorityBase": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string"
+        },
+        "nameType": {
+          "type": "string",
+          "enum": [
+            "Organizational",
+            "Personal"
+          ]
+        },
+        "authorityIdentifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string"
+              },
+              "scheme": {
+                "type": "string",
+                "enum": [
+                  "ORCID",
+                  "scopusID",
+                  "researcherID",
+                  "czenasAutID",
+                  "vedidk",
+                  "institutionalID",
+                  "ISNI",
+                  "ROR",
+                  "ICO",
+                  "DOI"
+                ]
+              }
+            },
+            "required": [
+              "identifier",
+              "scheme"
+            ],
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "fullName",
+          "nameType"
+        ]
+      }
+    },
+    "person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/authorityBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nameType": {
+              "type": "string",
+              "enum": [
+                "Personal"
+              ]
+            },
+            "affiliation": {
+              "description": "taxonomie institutions",
+              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmellow",
+              "type": "array",
+              "items": {
+                "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+              }
+            },
+            "required": [
+              "fullName"
+            ]
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "organisation": {
+      "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
+      "allOf": [
+        {
+          "$ref": "#/definitions/authorityBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "description": "taxonomie institutions",
+            "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "authority": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/person"
+        },
+        {
+          "$ref": "#/definitions/organisation"
+        }
+      ]
+    },
+    "objectPIDs": {
+      "description": "Persistent identifier/s of object",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string",
+          "enum": [
+            "DOI",
+            "Handle",
+            "ISBN",
+            "ISSN",
+            "RIV"
+          ]
+        }
+      },
+      "required": [
+        "identifier",
+        "scheme"
+      ],
+      "uniqueItems": true
+    },
+    "dateOrRange": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "year"
+        },
+        {
+          "format": "yearmonth"
+        },
+        {
+          "format": "date"
+        },
+        {
+          "format": "datetime"
+        },
+        {
+          "format": "year-range"
+        },
+        {
+          "format": "yearmonth-range"
+        },
+        {
+          "format": "date-range"
+        },
+        {
+          "format": "datetime-range"
+        }
+      ]
+    },
+    "date": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "year"
+        },
+        {
+          "format": "yearmonth"
+        },
+        {
+          "format": "date"
+        },
+        {
+          "format": "datetime"
+        }
+      ]
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
     "DataSet": {
       "id": "#dataset",
       "title": "OARepoRDM DataSet v3.0.0",
@@ -7,7 +195,7 @@
       "additionalProperties": false,
       "allOf": [
         {
-          "$ref": "invenio-v1.0.0.json#/definitions/InvenioRecord"
+          "$ref": "../invenio-v1.0.0.json#/definitions/InvenioRecord"
         },
         {
           "type": "object",
@@ -22,7 +210,7 @@
                 "additionalProperties": false,
                 "properties": {
                   "title": {
-                    "$ref": "multilingual-v2.0.0.json#/definitions/multilingual"
+                    "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
                   },
                   "titleType": {
                     "type": "string",
@@ -158,24 +346,24 @@
             },
             "abstract": {
               "description": "Multilingual abstract description for record (may contain HTML).",
-              "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+              "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
               "minItems": 1,
               "uniqueItems": true
             },
             "methods": {
               "description": "Multilingual methodology employed for the study or research.(may contain HTML)",
-              "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+              "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
               "uniqueItems": true
             },
             "technicalInfo": {
               "description": "Multilingual detailed information that may be associated with design, implementation, operation, use, and/or maintenance of a process or system.(may contain HTML)",
-              "$ref": "multilingual-v2.0.0.json#/definitions/multilingual",
+              "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
               "uniqueItems": true
             },
             "rights": {
               "description": "Any license or copyright information for this resource. Taxonomy field.",
               "$comment": "zkontrolovat, jestli naše struktura je dobře exportovatelná do DATACITE",
-              "$ref": "taxonomy-v2.0.0.json#/definitions/Term",
+              "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
               "uniqueItems": true
             },
             "accessRights": {
@@ -429,7 +617,7 @@
                   "type": "number"
                 },
                 "file_id": {
-                  "$ref": "#/identifier"
+                  "type": "string"
                 },
                 "key": {
                   "description": "Key (filename) of the file.",
@@ -477,7 +665,9 @@
                   ]
                 }
               }
-            },
+            }
+          }
+          ,
             "required": [
               "titles",
               "creator",
@@ -487,198 +677,8 @@
               "abstract",
               "subjectCategory"
             ]
-          }
         }
-      ],
-      "definitions": {
-        "authorityBase": {
-          "type": "object",
-          "properties": {
-            "fullName": {
-              "type": "string"
-            },
-            "nameType": {
-              "type": "string",
-              "enum": [
-                "Organizational",
-                "Personal"
-              ]
-            },
-            "authorityIdentifiers": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "identifier": {
-                    "type": "string"
-                  },
-                  "scheme": {
-                    "type": "string",
-                    "enum": [
-                      "ORCID",
-                      "scopusID",
-                      "researcherID",
-                      "czenasAutID",
-                      "vedidk",
-                      "institutionalID",
-                      "ISNI",
-                      "ROR",
-                      "ICO",
-                      "DOI"
-                    ]
-                  }
-                },
-                "required": [
-                  "identifier",
-                  "scheme"
-                ],
-                "uniqueItems": true
-              }
-            },
-            "required": [
-              "fullName",
-              "nameType"
-            ]
-          }
-        },
-        "person": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/authorityBase"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "nameType": {
-                  "type": "string",
-                  "enum": [
-                    "Personal"
-                  ]
-                },
-                "affiliation": {
-                  "description": "taxonomie institutions",
-                  "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmellow",
-                  "type": "array",
-                  "items": {
-                    "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-                  }
-                },
-                "required": [
-                  "fullName"
-                ]
-              },
-              "uniqueItems": true
-            }
-          ]
-        },
-        "organisation": {
-          "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
-          "allOf": [
-            {
-              "$ref": "#/definitions/authorityBase"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "description": "taxonomie institutions",
-                "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-              },
-              "uniqueItems": true
-            }
-          ]
-        },
-        "authority": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/person"
-            },
-            {
-              "$ref": "#/definitions/organisation"
-            }
-          ]
-        },
-        "objectPIDs": {
-          "description": "Persistent identifier/s of object",
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "identifier": {
-              "type": "string"
-            },
-            "scheme": {
-              "type": "string",
-              "enum": [
-                "DOI",
-                "Handle",
-                "ISBN",
-                "ISSN",
-                "RIV"
-              ]
-            }
-          },
-          "required": [
-            "identifier",
-            "scheme"
-          ],
-          "uniqueItems": true
-        },
-        "dateOrRange": {
-          "type": "string",
-          "anyOf": [
-            {
-              "format": "year"
-            },
-            {
-              "format": "yearmonth"
-            },
-            {
-              "format": "date"
-            },
-            {
-              "format": "datetime"
-            },
-            {
-              "format": "year-range"
-            },
-            {
-              "format": "yearmonth-range"
-            },
-            {
-              "format": "date-range"
-            },
-            {
-              "format": "datetime-range"
-            }
-          ]
-        },
-        "date": {
-          "type": "string",
-          "anyOf": [
-            {
-              "format": "year"
-            },
-            {
-              "format": "yearmonth"
-            },
-            {
-              "format": "date"
-            },
-            {
-              "format": "datetime"
-            }
-          ]
-        },
-        "longitude": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
-        },
-        "latitude": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
-        }
-      }
+      ]
     }
   }
 }

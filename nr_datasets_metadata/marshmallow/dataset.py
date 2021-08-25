@@ -12,7 +12,7 @@ from functools import partial
 from flask_babelex import lazy_gettext as _
 from flask_security import current_user
 from invenio_records_rest.schemas import StrictKeysMixin
-from marshmallow import fields, pre_load, validate, validates, Schema, validates_schema
+from marshmallow import fields, pre_load, validate, validates, Schema, validates_schema, ValidationError
 from marshmallow.fields import List
 from marshmallow_utils.fields import (
     EDTFDateString,
@@ -65,11 +65,76 @@ class TitlesSchema(Schema):
                     NAMES=NAMES)]
         }
     )
+class AuthorityIdentifiers(Schema):
+    NAMES = [
+        "ORCID",
+        "scopusID",
+        "researcherID",
+        "czenasAutID",
+        "vedidk",
+        "institutionalID",
+        "ISNI",
+        "ROR",
+        "ICO",
+        "DOI"
+    ]
+    identifier = SanitizedUnicode(required=True)
+    schema = SanitizedUnicode(
+        required=True,
+        validate=validate.OneOf(
+            choices=NAMES,
+            error=_('Invalid value. Choose one of {NAMES}.')
+            .format(NAMES=NAMES)
+        ),
+        error_messages={
+            # [] needed to mirror error message above
+            "required": [
+                _('Invalid value. Choose one of {NAMES}.').format(
+                    NAMES=NAMES)]
+        }
+    )
+class PersonSchema(Schema):
+    NAMES = [
+        "Personal"
+    ]
+    #authority baze
+    nameType = SanitizedUnicode(
+        required=False,
+        validate=validate.OneOf(
+            choices=NAMES,
+            error=_('Invalid value. Choose one of {NAMES}.')
+            .format(NAMES=NAMES)
+        ),
+        error_messages={
+            # [] needed to mirror error message above
+            "required": [
+                _('Invalid value. Choose one of {NAMES}.').format(
+                    NAMES=NAMES)]
+        }
+    )
+    fullName = SanitizedUnicode(required=True)
+    TYPES =  [
+                "Organizational",
+                "Personal"
+              ]
+    nameType = SanitizedUnicode(required=True,
+        validate=validate.OneOf(
+            choices=TYPES,
+            error=_('Invalid value. Choose one of {NAMES}.')
+            .format(NAMES=TYPES)
+        ),
+        error_messages={
+            # [] needed to mirror error message above
+            "required": [
+                _('Invalid value. Choose one of {NAMES}.').format(
+                    NAMES=TYPES)]
+        })
+    affiliation = fields.List(TaxonomyField()) #povinne pro creator a contributor todo: je tohle term?
+    authorityIdentifiers = fields.Nested(AuthorityIdentifiers)
 
-    @validates_schema
-    def validate_names(self, data, **kwargs):
-        """Validate names based on type."""
-        #todo require title type
+class CreatorSchema(Schema): #required fullname
+    authority = fields.List(fields.Nested(PersonSchema, ))
+    pass
 
 
 class DataSetMetadataSchemaV2(InvenioRecordMetadataFilesMixin,
@@ -86,7 +151,21 @@ class DataSetMetadataSchemaV2(InvenioRecordMetadataFilesMixin,
     #     )
     # )
     # creator = SanitizedUnicode()
-    titles = fields.Nested(TitlesSchema) #..
+    titles = fields.List(fields.Nested(TitlesSchema)) #..
+
+    @validates('titles')
+    def validate_titles(self, value):
+        """Validate types of titles."""
+        main_title = False
+        for item in value:
+            type = item['title_type']
+            if type == "mainTitle":
+                main_title = True
+        if not main_title:
+            raise ValidationError({
+                "title_type": _("At least one title must have type mainTitle")
+            })
+    creator = fields.List(fields.Nested(CreatorSchema))
     # additional_titles = List(MultilingualStringV2())
     # publisher = SanitizedUnicode()
     # publication_date = EDTFDateString(required=True)

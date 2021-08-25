@@ -46,10 +46,10 @@
           }
         }
       },
-        "required": [
-          "fullName",
-          "nameType"
-        ]
+      "required": [
+        "fullName",
+        "nameType"
+      ]
     },
     "person": {
       "allOf": [
@@ -67,16 +67,16 @@
             },
             "affiliation": {
               "description": "taxonomie institutions",
-              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmellow",
+              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow",
               "type": "array",
               "items": {
                 "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
               }
-            },
-            "required": [
-              "fullName"
-            ]
+            }
           },
+          "required": [
+            "fullName"
+          ],
           "uniqueItems": true
         }
       ]
@@ -256,13 +256,13 @@
                       }
                     }
                   }
-                ]
-              },
-              "required": [
-                "fullName",
-                "role"
-              ],
-              "uniqueItems": true
+                ],
+                "required": [
+                  "fullName",
+                  "role"
+                ],
+                "uniqueItems": true
+              }
             },
             "resourceType": {
               "$comment": "MARSHMALLOW: required pouze 1 hodnota z taxonomie, tj. min 1, max 1",
@@ -301,19 +301,16 @@
             "dateWithdrawn": {
               "description": "The date the resource is removed + description that indicates the reason for the retraction or withdrawal.",
               "$comment": "týká se datasetu, nikoliv metadat!!!",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/date"
+              "$comment": "Alzp: Type changed from allOf which wasn't usable in this case (hope so) to one object that includes date ",
+              "type": "object",
+              "properties": {
+                "dateInformation": {
+                  "type": "string"
                 },
-                {
-                  "type": "object",
-                  "properties": {
-                    "dateInformation": {
-                      "type": "string"
-                    }
-                  }
+                "date": {
+                  "$ref": "#/definitions/dateOrRange"
                 }
-              ]
+              }
             },
             "keywords": {
               "description": "free-form keywords, often created by author(s)",
@@ -322,9 +319,10 @@
                 "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
               }
             },
-            "subjectCategory": {
+            "subjectCategories": {
               "description": "konspekt nebo jiné oborové třídění - poslouží jako podklad pro oborové clustery",
               "$comment": "PETRA TO DO: potřeba něco převzít/vytvořit vlastní taxonomii",
+              "$comment": "Alzp: Name changed to categories",
               "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
               "minItems": 1,
               "uniqueItems": true
@@ -507,6 +505,7 @@
             },
             "geoLocation": {
               "type": "array",
+              "$comment": "Alzp: Name of required value changed from place to geoLocationPlace",
               "items": {
                 "type": "object",
                 "properties": {
@@ -531,7 +530,7 @@
                   }
                 },
                 "required": [
-                  "place"
+                  "geoLocationPlace"
                 ]
               },
               "uniqueItems": true
@@ -543,6 +542,7 @@
             "persistentIdentifiers": {
               "description": "Persistent identifier/s of object assigned by National Repository. Status needed for DOI requests.",
               "type": "array",
+              "$comment": "Alzp: shouldn't be property status set as optional, since is used only in DOI request use case?",
               "items": {
                 "allOf": [
                   {
@@ -555,10 +555,10 @@
                         "description": "Status of an identifier (e.g. requested, registered, external...)",
                         "type": "string"
                       }
-                    }
+                    },
+                    "required": ["status"]
                   }
-                ]
-              },
+                ],
               "required": [
                 "identifier",
                 "scheme",
@@ -566,6 +566,7 @@
               ],
               "minItems": 1,
               "uniqueItems": true
+              }
             },
             "_$comment": "!!!!!!section of administrative metadata needed for pilot!!!!!!",
             "oarepo:submitter": {
@@ -594,6 +595,7 @@
               "type": "string"
             },
             "_files": {
+              "$comment": "Alzp: object?",
               "$comment": "mělo by být přímo v invenio modelu",
               "type": "object",
               "additionalProperties": false,
@@ -666,17 +668,16 @@
                 }
               }
             }
-          }
-          ,
-            "required": [
-              "titles",
-              "creator",
-              "dateAvailable",
-              "resourceType",
-              "accessRights",
-              "abstract",
-              "subjectCategory"
-            ]
+          },
+          "required": [
+            "titles",
+            "creator",
+            "dateAvailable",
+            "resourceType",
+            "accessRights",
+            "abstract",
+            "subjectCategories"
+          ]
         }
       ]
     }

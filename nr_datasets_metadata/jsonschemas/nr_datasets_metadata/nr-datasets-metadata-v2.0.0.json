@@ -44,12 +44,12 @@
             ],
             "uniqueItems": true
           }
-        },
+        }
+      },
         "required": [
           "fullName",
           "nameType"
         ]
-      }
     },
     "person": {
       "allOf": [
@@ -322,7 +322,7 @@
                 "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
               }
             },
-            "subjectCategories": {
+            "subjectCategory": {
               "description": "konspekt nebo jiné oborové třídění - poslouží jako podklad pro oborové clustery",
               "$comment": "PETRA TO DO: potřeba něco převzít/vytvořit vlastní taxonomii",
               "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",

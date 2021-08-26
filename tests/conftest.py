@@ -507,8 +507,19 @@ def get_pid():
     return record_uuid, provider.pid.pid_value
 
 @pytest.fixture()
-def tax_test():
+def new_datamodel_jschema_test():
     return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
+            "InvenioID": "xx",
+            "abstract": {"cs": "test"},
+            "methods": {"cs": "test"},
+            "keywords": {"cs": "test"},
+            "version": "kch",
+            "technicalInfo": {"cs": "test"},
+            "geoLocation": [
+                {"geoLocationPlace": "place", "geoLocationPoint": {"pointLongitude": 100, "pointLatitude": 0}}],
+            "persistentIdentifiers": [{"identifier": "10.5281/zenodo.5257698", "scheme": "doi", "status": "requested"}],
+            "dateAvailable": "1970", "dateModified": "1990",
+            "dateCollected": "1970", "dateValidTo": "1990", "dateWithdrawn": {"date": "1998", "dateInformation": "kch"},
             "language": [{'is_ancestor': False,
                                    'level': 1,
                                    'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},

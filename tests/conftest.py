@@ -544,12 +544,18 @@ def new_datamodel_jschema_test():
 @pytest.fixture()
 def fundingReference_test():
     return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
+            "dateAvailable": "1970",
+            "abstract": {"cs": "test"},
             "fundingReference" : [{"projectID": "x", "projectName": "y", "fundingProgram": "z",
                                    "funder":[{'is_ancestor': False,
                           'level': 1,
                           'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
                           'title': {'cs': 'Anglicky'}}]
                                    }],
+            "subjectCategories": [{'is_ancestor': False,
+                                   'level': 1,
+                                   'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                                   'title': {'cs': 'Anglicky'}}],
             "accessRights": [{'is_ancestor': False,
                           'level': 1,
                           'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},

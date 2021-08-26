@@ -10,9 +10,11 @@ from oarepo_multilingual.marshmallow import MultilingualStringV2
 from flask_babelex import lazy_gettext as _
 from oarepo_taxonomies.marshmallow import TaxonomyField
 from marshmallow_utils.schemas import IdentifierSchema as IS
+
 def always_valid(identifier):
     """Gives every identifier as valid."""
     return True
+
 RDM_RECORDS_IDENTIFIERS_SCHEMES ={
         "ark": {
             "label": _("ARK"),
@@ -201,7 +203,7 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
                 "resource_type": _("Only one value required")
             })
 
-    dateAvailable = fields.String() #todo date
+    dateAvailable = fields.String(required=True) #todo date
 
     @validates('dateAvailable')
     def validate_dates(self, value):
@@ -214,7 +216,7 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
     dateWithdrawn = fields.Nested(DateWithdrawn)
 
     keywords = MultilingualStringV2()
-    subjectCategories = TaxonomyField()
+    subjectCategories = TaxonomyField(required=True)
 
     @validates('subjectCategories')
     def validate_subjectCategories(self, value):
@@ -241,7 +243,7 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
                 "rights": _("Unique items required")
             })
 
-    accessRights = TaxonomyField()
+    accessRights = TaxonomyField(required=True)
 
     @validates('accessRights')
     def validate_accessRights(self, value):
@@ -259,7 +261,7 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
                 "note": _("Unique items required")
             })
 
-    abstract = MultilingualStringV2()
+    abstract = MultilingualStringV2(required=True)
 
     @validates('abstract')
     def validate_abstract(self, value):
@@ -314,5 +316,5 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
                 "resource_type": _("One or more values required")
             })
     #todo oarepo veci
-    #todo _files
+    #todo _files, creator, contributor, resourcetype
     #todo required

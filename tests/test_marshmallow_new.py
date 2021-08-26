@@ -10,7 +10,7 @@ class MD(DataSetMetadataSchemaV3):
 
 def test_marshmallow(app, db, taxonomy_tree, new_datamodel_jschema_test, fundingReference_test):
 
-   
+
     data = new_datamodel_jschema_test
     assert data == MD().load(data)
 

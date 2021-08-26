@@ -36,7 +36,7 @@ from marshmallow.fields import Url, Boolean, Nested, List
 from oarepo_mapping_includes.ext import OARepoMappingIncludesExt
 from oarepo_references import OARepoReferences
 from oarepo_references.mixins import ReferenceEnabledRecordMixin
-from oarepo_taxonomies.cli import init_db
+from oarepo_taxonomies.cli import init_db, import_taxonomy
 from oarepo_taxonomies.ext import OarepoTaxonomies
 from oarepo_validate import MarshmallowValidatedRecordMixin
 from oarepo_validate.ext import OARepoValidate
@@ -211,17 +211,24 @@ def db(app):
     if not database_exists(str(db_.engine.url)):
         create_database(db_.engine.url)
     db_.create_all()
-    subprocess.run(["invenio", "taxonomies", "init"])
+    #subprocess.run(["invenio", "taxonomies", "init"])
     runner = app.test_cli_runner()
     result = runner.invoke(init_db)
     if result.exit_code:
         print(result.output, file=sys.stderr)
     assert result.exit_code == 0
+    for f in os.listdir('taxonomies'):
+        result = runner.invoke(import_taxonomy, os.path.join('taxonomies', f))
+        if result.exit_code:
+            print(result.output, file=sys.stderr)
+        assert result.exit_code == 0
     yield db_
 
     # Explicitly close DB connection
     db_.session.close()
     db_.drop_all()
+    if os.path.exists(db_path):
+        os.remove(db_path)
 
 
 @pytest.fixture

@@ -70,7 +70,7 @@
               "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow",
               "type": "array",
               "items": {
-                "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
               }
             }
           },
@@ -83,6 +83,7 @@
     },
     "organisation": {
       "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
+      "$comment": "Alzp: Name of the property? Should be object?",
       "allOf": [
         {
           "$ref": "#/definitions/authorityBase"
@@ -91,7 +92,7 @@
           "type": "object",
           "properties": {
             "description": "taxonomie institutions",
-            "ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+            "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
           },
           "uniqueItems": true
         }

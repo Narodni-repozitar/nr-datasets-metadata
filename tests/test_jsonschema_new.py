@@ -19,9 +19,7 @@ def get_schema():
     return schema
 def test_json(app):
     """Test of json schema with app."""
-    # resolve = jsonschema.RefResolver('https://narodni-repozitar.cz/',get_schema())
-    # data = json.loads('{"these": {"titles" : []}}')
-    # validate(instance=data, schema=get_schema(), resolver=resolve)
+
     schema = app.extensions['invenio-records']
 
     #bare minimum
@@ -32,7 +30,7 @@ def test_json(app):
                       '"titles" : [{"title": {"cs" : "jeej"}, "titleType": "mainTitle"}], '
                       '"creator" : ['
                             '{"nameType": "Personal", '
-                            '"affiliaton": [{"termin": "termin"}], '
+                            '"affiliatoin": [{"termin": "termin"}], '
                             '"fullName": "Alzbeta Pokorna", '
                             '"authorityIdentifiers": [{"identifier": "jej", "scheme": "ORCID"}]'
                             '}'
@@ -44,7 +42,30 @@ def test_json(app):
                       '"subjectCategories": [{"termin": "termin"}] '
                       '}'
                       '}')
-    #data = json.loads('{"these": {"titles" : [{"title" :{"cs": "jej", "en": "yay"}, "titleType": "mainTitle"}]}}')
+
+    schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
+
+    #organization todo
+    data = json.loads('{"these": '
+                      '{'
+                      '"$schema":"https://narodni-repozitar.cz/schemas/nr_datasets_metadata/nr-datasets-metadata-v2.0.0.json",'
+                      '"InvenioID": "1",'
+                      '"titles" : [{"title": {"cs" : "jeej"}, "titleType": "mainTitle"}], '
+                      '"creator" : ['
+                      '{"nameType": "Personal", '
+                      '"affiliation": [{"termin": "termin"}], '
+                      '"fullName": "Alzbeta Pokorna", '
+                      '"authorityIdentifiers": [{"identifier": "jej", "scheme": "ORCID"}]'
+                      '}'
+                      '],'
+                      '"dateAvailable": "1970",'
+                      '"resourceType": [{"termin": "termin"}],'
+                      '"accessRights" : [{"termin": "termin"}],'
+                      '"abstract" : {"cs": "kchc"},'
+                      '"subjectCategories": [{"termin": "termin"}] '
+                      '}'
+                      '}')
+
     schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
 
     #all properties used
@@ -140,6 +161,7 @@ def test_json(app):
                       '}')
     schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
     #todo:unique items
+    #todo: organization
 
     # data = json.loads('{"these": {"abstract" : 1}}')
     # with pytest.raises(ValidationError):

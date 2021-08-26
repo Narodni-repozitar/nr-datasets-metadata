@@ -211,17 +211,18 @@ def db(app):
     if not database_exists(str(db_.engine.url)):
         create_database(db_.engine.url)
     db_.create_all()
-    #subprocess.run(["invenio", "taxonomies", "init"])
+    subprocess.run(["invenio", "taxonomies", "init"])
     runner = app.test_cli_runner()
     result = runner.invoke(init_db)
     if result.exit_code:
         print(result.output, file=sys.stderr)
     assert result.exit_code == 0
-    for f in os.listdir('taxonomies'):
-        result = runner.invoke(import_taxonomy, os.path.join('taxonomies', f))
-        if result.exit_code:
-            print(result.output, file=sys.stderr)
-        assert result.exit_code == 0
+
+    # for f in os.listdir('taxonomies'):
+    #     result = runner.invoke(import_taxonomy, os.path.join('taxonomies', f))
+    #     if result.exit_code:
+    #         print(result.output, file=sys.stderr)
+    #     assert result.exit_code == 0
     yield db_
 
     # Explicitly close DB connection
@@ -504,6 +505,46 @@ def get_pid():
         object_uuid=record_uuid,
     )
     return record_uuid, provider.pid.pid_value
+
+@pytest.fixture()
+def tax_test():
+    return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
+            "language": [{'is_ancestor': False,
+                                   'level': 1,
+                                   'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                                   'title': {'cs': 'Anglicky'}}],
+            "rights": [{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}],
+            "accessRights": [{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}],
+            "subjectCategories" : [{'is_ancestor': False,
+                        'level': 1,
+                        'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                        'title': {'cs': 'Anglicky'}}],
+            "resourceType": [{'is_ancestor': False,
+                   'level': 1,
+                   'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/resourceType/datasets'},
+                   'title': {'cs': 'Datasety'}}],}
+
+@pytest.fixture()
+def fundingReference_test():
+    return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
+            "fundingReference" : [{"projectID": "x", "projectName": "y", "fundingProgram": "z",
+                                   "funder":[{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}]
+                                   }],
+            "accessRights": [{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}],
+
+            }
 
 
 @pytest.fixture()

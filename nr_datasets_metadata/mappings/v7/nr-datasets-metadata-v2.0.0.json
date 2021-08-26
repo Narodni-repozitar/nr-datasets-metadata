@@ -23,7 +23,7 @@
             "type": "keyword"
           },
           "size": {
-            "type": "keyword"
+            "type": "integer"
           },
           "versionID": {
             "type": "keyword"
@@ -35,7 +35,7 @@
             "type": "keyword"
           },
           "accessRights": {
-            "type": "keyword"
+            "type": "taxonomy-term"
           },
           "fileNote": {
             "type": "object",
@@ -44,7 +44,7 @@
                 "type": "keyword"
               },
               "type": {
-                "type": "keyword"
+                "type": "boolean"
               }
             }
           },
@@ -63,7 +63,7 @@
             "type": "keyword"
           },
           "role": {
-            "type": "keyword"
+            "type": "taxonomy-term"
           }
         },
         "type": "object"
@@ -77,28 +77,48 @@
         "type": "object"
       },
       "dateAvailable": {
-        "type": "keyword"
+        "type": "date"
       },
       "dateModified": {
-        "type": "keyword"
+        "type": "date"
       },
       "dateCollected": {
-        "type": "keyword"
+        "type": "date"
       },
       "dateCreated": {
-        "type": "keyword"
+        "type": "date"
       },
       "dateWithdrawn": {
-        "type": "keyword"
+        "type": "object",
+        "properties": {
+          "dateInformation": {
+            "type": "keyword"
+          },
+          "date": {
+            "type": "date"
+          }
+        }
       },
       "dateValidTo": {
-        "type": "keyword"
+        "type": "date"
       },
       "resourceType": {
         "type": "keyword"
       },
       "InvenioID": {
         "type": "keyword"
+      },
+      "oarepo:submitter": {
+         "type": "keyword"
+      },
+      "oarepo:recordStatus": {
+         "type": "keyword"
+      },
+      "oarepo:communities": {
+         "type": "keyword"
+      },
+      "oarepo:primaryCommunity": {
+         "type": "keyword"
       },
       "persistentIdentifiers": {
         "properties": {
@@ -124,19 +144,19 @@
         "type": "multilingual"
       },
       "languages": {
-        "type": "keyword"
+        "type": "taxonomy-term"
       },
       "note": {
         "type": "keyword"
       },
       "accessRights": {
-        "type": "keyword"
+        "type": "taxonomy-term"
       },
       "rights": {
-        "type": "keyword"
+        "type": "taxonomy-term"
       },
       "subjectCategories": {
-        "type": "keyword"
+        "type": "taxonomy-term"
       },
       "titles": {
         "type": "object",
@@ -153,40 +173,44 @@
         "type": "object",
         "properties": {
           "itemTitle": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemURL": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemYear": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemVolume": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemIssue": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemStartPage": {
-            "type": "multilingual"
+            "type": "keyword"
           },
           "itemEndPage": {
-            "type": "multilingual"
+            "type": "keyword"
           },
-          "temPublisher": {
-            "type": "multilingual"
+          "itemPublisher": {
+            "type": "keyword"
           },
           "itemRelationType": {
-            "type": "multilingual"
+            "type": "taxonomy-term"
           },
           "itemResourceType": {
-            "type": "multilingual"
+            "type": "taxonomy-term"
           },
           "itemContributor": {
             "type": "object",
             "properties": {
-              "authority": "keyword",
-              "role": "keyword"
+              "authority": {
+                "type": "keyword"
+              },
+              "role": {
+                "type": "taxonomy-term"
+              }
             }
           },
           "itemPIDs": {
@@ -199,17 +223,57 @@
               }
             },
             "type": "object"
-          },
-          "titleType": {
-            "type": "object",
-            "properties": {
-              "authority": "keyword"
-            }
           }
         }
       },
       "version": {
         "type": "keyword"
+      },
+      "fundingReference": {
+        "type": "object",
+        "properties": {
+          "projectID": {
+            "type": "keyword"
+          },
+          "projectName": {
+            "type": "keyword"
+          },
+          "fundingProgram": {
+            "type": "keyword"
+          },
+          "funder": {
+            "type": "taxonomy-term"
+          }
+        }
+      },
+      "geoLocation": {
+        "type": "object",
+        "properties": {
+          "geoLocationPlace": {
+            "type": "keyword"
+          },
+          "geoLocationPoint": {
+            "type": "object",
+            "properties": {
+              "pointLongitude": {
+                "type": "object",
+                "properties": {
+                  "longitude": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "pointLatitude": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "type": "object"

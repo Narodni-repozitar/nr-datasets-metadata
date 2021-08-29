@@ -275,7 +275,7 @@
               "$comment": "týká se datasetu, nikoliv metadat!!!",
               "$comment1": "podle něj se bude řídit embargo, takže vyplní se datum, kdy mají být data v repozitáři veřejná (dataset access rights = open access); převzáno z datacite",
               "$comment2": "publicationYear, který je pro datacite povinný se bude generovat v oai-pmh z tohohle pole",
-              "$comment3" : "Alzp: Should be array?",
+              "$comment3" : "Alzp: minItems?",
               "$ref": "#/definitions/date",
               "minItems": 1
             },

@@ -11,107 +11,9 @@ from flask_babelex import lazy_gettext as _
 from oarepo_taxonomies.marshmallow import TaxonomyField
 from marshmallow_utils.schemas import IdentifierSchema as IS
 
-def always_valid(identifier):
-    """Gives every identifier as valid."""
-    return True
+from nr_datasets_metadata.marshmallow.constants import RDM_RECORDS_IDENTIFIERS_SCHEMES
 
-RDM_RECORDS_IDENTIFIERS_SCHEMES ={
-        "ark": {
-            "label": _("ARK"),
-            "validator": idutils.is_ark,
-            "datacite": "ARK"
-        },
-        "arxiv": {
-            "label": _("arXiv"),
-            "validator": idutils.is_arxiv,
-            "datacite": "arXiv"
-        },
-        "bibcode": {
-            "label": _("Bibcode"),
-            "validator": idutils.is_ads,
-            "datacite": "bibcode"
-        },
-        "doi": {
-            "label": _("DOI"),
-            "validator": idutils.is_doi,
-            "datacite": "DOI"
-        },
-        "ean13": {
-            "label": _("EAN13"),
-            "validator": idutils.is_ean13,
-            "datacite": "EAN13"
-        },
-        "eissn": {
-            "label": _("EISSN"),
-            "validator": idutils.is_issn,
-            "datacite": "EISSN"
-        },
-        "handle": {
-            "label": _("Handle"),
-            "validator": idutils.is_handle,
-            "datacite": "Handle"
-        },
-        "igsn": {
-            "label": _("IGSN"),
-            "validator": always_valid,
-            "datacite": "IGSN"
-        },
-        "isbn": {
-            "label": _("ISBN"),
-            "validator": idutils.is_isbn,
-            "datacite": "ISBN"
-        },
-        "issn": {
-            "label": _("ISSN"),
-            "validator": idutils.is_issn,
-            "datacite": "ISSN"
-        },
-        "istc": {
-            "label": _("ISTC"),
-            "validator": idutils.is_istc,
-            "datacite": "ISTC"
-        },
-        "lissn": {
-            "label": _("LISSN"),
-            "validator": idutils.is_issn,
-            "datacite": "LISSN"
-        },
-        "lsid": {
-            "label": _("LSID"),
-            "validator": idutils.is_lsid,
-            "datacite": "LSID"
-        },
-        "pmid": {
-            "label": _("PMID"),
-            "validator": idutils.is_pmid,
-            "datacite": "PMID"
-        },
-        "purl": {
-            "label": _("PURL"),
-            "validator": idutils.is_purl,
-            "datacite": "PURL"
-        },
-        "upc": {
-            "label": _("UPC"),
-            "validator": always_valid,
-            "datacite": "UPC"
-        },
-        "url": {
-            "label": _("URL"),
-            "validator": idutils.is_url,
-            "datacite": "URL"
-        },
-        "urn": {
-            "label": _("URN"),
-            "validator": idutils.is_urn,
-            "datacite": "URN"
-        },
-        "w3id": {
-            "label": _("W3ID"),
-            "validator": always_valid,
-            "datacite": "w3id"
-        },
-    }
+
 def _no_duplicates(value_list):
     str_list = [str(value) for value in value_list]
     return len(value_list) == len(set(str_list))
@@ -121,6 +23,38 @@ def _only_one_item(value_list):
 
 def _more_than_one_item(value_list):
     return len(value_list) >= 1
+
+class FileNoteSchema(Schema):
+    description = fields.String()
+    type = fields.Boolean()
+
+class FilesSchema(Schema):
+    NAMES = ["fulltext",
+                    "dataset",
+                    "software",
+                    "other"]
+    versionID =fields.String()
+    bucketID = fields.String()
+    checksum = fields.String()
+    size = fields.Integer()
+    file_id = fields.String()
+    key = fields.String()
+    mimeType = fields.String()
+    url = fields.Url()
+    accessRights = TaxonomyField()
+    fileNote = fields.List(fields.Nested(FileNoteSchema))
+    objectType = SanitizedUnicode(
+        required=True,
+        validate=validate.OneOf(
+            choices=NAMES,
+            error=_('Invalid value. Choose one of {NAMES}.')
+            .format(NAMES=NAMES)
+        ),
+        error_messages={
+            # [] needed to mirror error message above
+            "required": _('Invalid value. Choose one of {NAMES}.').format(NAMES=NAMES)
+        }
+    )
 
 class DateWithdrawn(Schema):
     date = EDTFDateString()
@@ -313,8 +247,10 @@ class DataSetMetadataSchemaV3(InvenioRecordMetadataFilesMixin,
             })
         if not _more_than_one_item(value):
             raise ValidationError({
-                "resource_type": _("One or more values required")
+                "persistentIdentifiers": _("One or more values required")
             })
-    #todo oarepo veci
-    #todo _files, creator, contributor, resourcetype
-    #todo required
+    #todo oarepo veci ??
+
+    _files = fields.Nested(FilesSchema)
+    #todo creator, contributor
+

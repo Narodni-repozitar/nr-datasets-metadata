@@ -27,7 +27,6 @@ def test_json(app):
     # bare minimum
     data = {"these":
         {
-            "InvenioID": "1",
             "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"}],
             "creators": [
                 {"nameType": "Personal",
@@ -49,7 +48,6 @@ def test_json(app):
     # organization todo
     data = {"these":
         {
-            "InvenioID": "1",
             "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"}],
             "creators": [
                 {"nameType": "Personal",
@@ -71,7 +69,6 @@ def test_json(app):
     # all properties used
     data = {"these":
         {
-            "InvenioID": "1",
             "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"},
                        {"title": {"cs": "jeej"}, "titleType": "subtitle"}],
             "creators": [

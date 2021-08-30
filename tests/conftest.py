@@ -517,7 +517,6 @@ def get_pid():
 @pytest.fixture()
 def new_datamodel_jschema_test():
     return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
-            "InvenioID": "xx",
             "abstract": {"cs": "test"},
             "methods": {"cs": "test"},
             "keywords": {"cs": "test"},

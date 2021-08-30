@@ -255,84 +255,197 @@ def test_contributor(app, db, taxonomy_tree):
 
 
 def test_whole_marshmallow(app, db, taxonomy_tree):
-    assert_schema_passing(DataSetMetadataSchemaV3, {
-        "InvenioID": "1",
-        "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"},
-                   {"title": {"cs": "jeej"}, "titleType": "subtitle"}],
-        "creators": [
-            {"nameType": "Personal",
-             "affiliation": AMU,
-             "fullName": "Alzbeta Pokorna",
-             "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
-             }
-        ],
-        "contributors": [
-            {"nameType": "Personal",
-             "affiliation": AMU,
-             "fullName": "Alzbeta Pokorna",
-             "role": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/supervisor"}}],
-             "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
-             }
-        ],
-        "dateAvailable": "1970",
-        "resourceType": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/resourceType/datasets"}}],
-        "accessRights": [{"title": {
-            "cs": "otevřený přístup",
-            "en": "open access"
-        },
-            "relatedURI": {
-                "coar": "http://purl.org/coar/access_right/c_abf2",
-                "vocabs": "https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public",
-                "eprint": "http://purl.org/eprint/accessRights/OpenAccess"
-            }, "links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/c-abf2"}}],
-        "abstract": {"cs": "kchc"},
-        "subjectCategories": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/psh3001"}}],
-        "dateModified": "1999",
-        "dateCollected": "2018-03",
-        "dateCreated": "1996-10-12",
-        "dateValidTo": "1996-10",
-        "dateWithdrawn": {"date": "1970", "dateInformation": "informace"},
-        "keywords": [{"cs": "jej", "en": "yey"}, {"cs": "jejj", "en": "yey!"}],
-        "language": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/cze"}}],
-        "note": ["nota1", "nota2"],
-        "methods": {"en": "method"},
-        "technicalInfo": {"cs": "das TechnicalInfo"},
-        "rights": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/licenses/cc"}}],
-        "relatedItems":
-            [{
-                "itemTitle": "titulek",
-                "itemCreator": [
-                    {"nameType": "Personal",
-                     'affiliation': AMU,
-                     "fullName": "Alzbeta Pokorna",
-                     "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
-                     }
-                ],
-                "itemContributor": [
-                    {"nameType": "Personal",
-                     'affiliation': AMU,
-                     "fullName": "Alzbeta Pokorna",
-                     "role": [{"termin": "termin"}],
-                     "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
-                     }
-                ],
-                "itemPIDs": [{"identifier": "10.1038/nphys1170", "scheme": "doi"}],
-                "itemYear": "1970",
-                "itemVolume": "volume",
-                "itemIssue": "issue",
-                "itemStartPage": "start",
-                "itemEndPage": "konec",
-                "itemPublisher": "publisher",
-                "itemRelationType": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/article"}}],
-                "itemResourceType": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/resourceType/datasets"}}]
-            }],
-        "fundingReference": [
-            {"projectID": "kch", "projectName": "kk", "fundingProgram": "jeeej",
-             "funder": [{"links": {"self": "http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/ntk"}}]}],
-        "version": "jeeej",
-        "geoLocation": [{
-            "geoLocationPlace": "place",
-            "geoLocationPoint": {"pointLongitude": 100, "pointLatitude": 0}
-        }],
-        "persistentIdentifiers": [{"identifier": "10.1038/nphys1170", "scheme": "doi", "status": "requested"}],
-    })
+    assert_schema_passing(
+        DataSetMetadataSchemaV3,
+        {'InvenioID': '1',
+         'abstract': {'cs': 'kchc'},
+         'accessRights': [{'is_ancestor': False,
+                           'level': 1,
+                           'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/c-abf2'},
+                           'relatedURI': {'coar': 'http://purl.org/coar/access_right/c_abf2',
+                                          'eprint': 'http://purl.org/eprint/accessRights/OpenAccess',
+                                          'vocabs': 'https://vocabs.acdh.oeaw.ac.at/archeaccessrestrictions/public'},
+                           'title': {'cs': 'otevřený přístup', 'en': 'open access'}}],
+         'contributors': [{'affiliation': [{'address': 'Malostranské náměstí 259/12, '
+                                                       '118 00 Praha 1',
+                                            'fullName': 'test',
+                                            'ico': '61384984',
+                                            'is_ancestor': False,
+                                            'level': 1,
+                                            'links': {
+                                                'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/61384984'},
+                                            'nameType': 'Organizational',
+                                            'provider': True,
+                                            'related': {'rid': '51000'},
+                                            'title': {'cs': 'Akademie múzických umění '
+                                                            'v Praze',
+                                                      'en': 'Academy of Performing '
+                                                            'Arts in Prague'},
+                                            'type': 'veřejná VŠ',
+                                            'url': 'https://www.amu.cz'}],
+                           'authorityIdentifiers': [{'identifier': 'jej---',
+                                                     'scheme': 'orcid'}],
+                           'fullName': 'Alzbeta Pokorna',
+                           'nameType': 'Personal',
+                           'role': [{'dataCiteCode': 'Supervisor',
+                                     'is_ancestor': False,
+                                     'level': 1,
+                                     'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/supervisor'},
+                                     'title': {'cs': 'supervizor',
+                                               'en': 'supervisor'}}]}],
+         'creators': [{'affiliation': [{'address': 'Malostranské náměstí 259/12, 118 '
+                                                   '00 Praha 1',
+                                        'fullName': 'test',
+                                        'ico': '61384984',
+                                        'is_ancestor': False,
+                                        'level': 1,
+                                        'links': {
+                                            'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/61384984'},
+                                        'nameType': 'Organizational',
+                                        'provider': True,
+                                        'related': {'rid': '51000'},
+                                        'title': {'cs': 'Akademie múzických umění v '
+                                                        'Praze',
+                                                  'en': 'Academy of Performing Arts in '
+                                                        'Prague'},
+                                        'type': 'veřejná VŠ',
+                                        'url': 'https://www.amu.cz'}],
+                       'authorityIdentifiers': [{'identifier': 'jej---',
+                                                 'scheme': 'orcid'}],
+                       'fullName': 'Alzbeta Pokorna',
+                       'nameType': 'Personal'}],
+         'dateAvailable': '1970',
+         'dateCollected': '2018-03',
+         'dateCreated': '1996-10-12',
+         'dateModified': '1999',
+         'dateValidTo': '1996-10',
+         'dateWithdrawn': {'date': '1970', 'dateInformation': 'informace'},
+         'fundingReference': [{'funder': [{'funderISVaVaICode': '123456789',
+                                           'is_ancestor': False,
+                                           'level': 1,
+                                           'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/ntk'},
+                                           'title': {'cs': 'Národní technická knihovna',
+                                                     'en': 'National library of '
+                                                           'technology'}}],
+                               'fundingProgram': 'jeeej',
+                               'projectID': 'kch',
+                               'projectName': 'kk'}],
+         'geoLocation': [{'geoLocationPlace': 'place',
+                          'geoLocationPoint': {'pointLatitude': 0,
+                                               'pointLongitude': 100}}],
+         'keywords': [{'cs': 'jej', 'en': 'yey'}, {'cs': 'jejj', 'en': 'yey!'}],
+         'language': [{'is_ancestor': False,
+                       'level': 1,
+                       'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/cze'},
+                       'title': {'cs': 'čeština', 'en': 'Czech'}}],
+         'methods': {'en': 'method'},
+         'note': ['nota1', 'nota2'],
+         'persistentIdentifiers': [{'identifier': '10.1038/nphys1170',
+                                    'scheme': 'doi',
+                                    'status': 'requested'}],
+         'relatedItems': [{'itemContributor': [{'affiliation': [{'address': 'Malostranské '
+                                                                            'náměstí '
+                                                                            '259/12, '
+                                                                            '118 00 '
+                                                                            'Praha 1',
+                                                                 'fullName': 'test',
+                                                                 'ico': '61384984',
+                                                                 'is_ancestor': False,
+                                                                 'level': 1,
+                                                                 'links': {
+                                                                     'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/61384984'},
+                                                                 'nameType': 'Organizational',
+                                                                 'provider': True,
+                                                                 'related': {'rid': '51000'},
+                                                                 'title': {'cs': 'Akademie '
+                                                                                 'múzických '
+                                                                                 'umění '
+                                                                                 'v '
+                                                                                 'Praze',
+                                                                           'en': 'Academy '
+                                                                                 'of '
+                                                                                 'Performing '
+                                                                                 'Arts '
+                                                                                 'in '
+                                                                                 'Prague'},
+                                                                 'type': 'veřejná VŠ',
+                                                                 'url': 'https://www.amu.cz'}],
+                                                'authorityIdentifiers': [{'identifier': 'jej---',
+                                                                          'scheme': 'orcid'}],
+                                                'fullName': 'Alzbeta Pokorna',
+                                                'nameType': 'Personal',
+                                                'role': [{'dataCiteCode': 'Supervisor',
+                                                          'is_ancestor': False,
+                                                          'level': 1,
+                                                          'links': {
+                                                              'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/supervisor'},
+                                                          'title': {'cs': 'supervizor',
+                                                                    'en': 'supervisor'}}]}],
+                           'itemCreator': [{'affiliation': [{'address': 'Malostranské '
+                                                                        'náměstí '
+                                                                        '259/12, 118 '
+                                                                        '00 Praha 1',
+                                                             'fullName': 'test',
+                                                             'ico': '61384984',
+                                                             'is_ancestor': False,
+                                                             'level': 1,
+                                                             'links': {
+                                                                 'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/61384984'},
+                                                             'nameType': 'Organizational',
+                                                             'provider': True,
+                                                             'related': {'rid': '51000'},
+                                                             'title': {'cs': 'Akademie '
+                                                                             'múzických '
+                                                                             'umění v '
+                                                                             'Praze',
+                                                                       'en': 'Academy '
+                                                                             'of '
+                                                                             'Performing '
+                                                                             'Arts in '
+                                                                             'Prague'},
+                                                             'type': 'veřejná VŠ',
+                                                             'url': 'https://www.amu.cz'}],
+                                            'authorityIdentifiers': [{'identifier': 'jej---',
+                                                                      'scheme': 'orcid'}],
+                                            'fullName': 'Alzbeta Pokorna',
+                                            'nameType': 'Personal'}],
+                           'itemEndPage': 'konec',
+                           'itemIssue': 'issue',
+                           'itemPIDs': [{'identifier': '10.1038/nphys1170',
+                                         'scheme': 'doi'}],
+                           'itemPublisher': 'publisher',
+                           'itemRelationType': [{'is_ancestor': False,
+                                                 'level': 1,
+                                                 'links': {
+                                                     'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/article'},
+                                                 'title': {'cs': 'Article'}}],
+                           'itemResourceType': [{'is_ancestor': False,
+                                                 'level': 1,
+                                                 'links': {
+                                                     'self': 'http://127.0.0.1:5000/2.0/taxonomies/resourceType/datasets'},
+                                                 'title': {'cs': 'Datasety'}}],
+                           'itemStartPage': 'start',
+                           'itemTitle': 'titulek',
+                           'itemVolume': 'volume',
+                           'itemYear': '1970'}],
+         'resourceType': [{'is_ancestor': False,
+                           'level': 1,
+                           'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/resourceType/datasets'},
+                           'title': {'cs': 'Datasety'}}],
+         'rights': [{'is_ancestor': False,
+                     'level': 1,
+                     'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/licenses/cc'},
+                     'title': {'cs': 'Licence Creative Commons'}}],
+         'subjectCategories': [{'DateRevised': '2007-01-26T16:14:37',
+                                'is_ancestor': False,
+                                'level': 1,
+                                'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/psh3001'},
+                                'relatedURI': [],
+                                'title': {'cs': 'Reynoldsovo číslo',
+                                          'en': 'Reynolds number'}}],
+         'technicalInfo': {'cs': 'das TechnicalInfo'},
+         'titles': [{'title': {'cs': 'jeej'}, 'titleType': 'mainTitle'},
+                    {'title': {'cs': 'jeej'}, 'titleType': 'subtitle'}],
+         'version': 'jeeej'
+         }
+    )

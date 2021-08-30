@@ -1,3 +1,6 @@
+import functools
+import inspect
+
 from flask_babelex import lazy_gettext as _
 from marshmallow import Schema, fields, ValidationError
 from marshmallow_oneofschema import OneOfSchema
@@ -45,6 +48,11 @@ class OrganizationSchema(AuthorityBaseSchema, TaxonomySchema):
 
 class AuthoritySchema(Schema):
 
+    @functools.lru_cache(maxsize=2)
+    def wrap_class(self, clz):
+        # add extra fields to the class
+        return type(clz.__name__, (clz,), self.declared_fields)
+
     def load(self, data, *, many=None, partial=None, unknown=None, **kwargs):
         if isinstance(data, (list, tuple)):
             types = set()
@@ -54,12 +62,12 @@ class AuthoritySchema(Schema):
                 raise ValidationError(message=_('Can not mix personal and organizational authorities'))
             name_type = list(types)[0]
             if name_type == 'Personal':
-                return PersonSchema().load(data, many=True, partial=partial, unknown=unknown)
+                return self.wrap_class(PersonSchema)().load(data, many=True, partial=partial, unknown=unknown)
             else:
-                return OrganizationSchema().load(data, many=True, partial=partial, unknown=unknown)
+                return self.wrap_class(OrganizationSchema)().load(data, many=True, partial=partial, unknown=unknown)
 
         name_type = data['nameType']
         if name_type == 'Personal':
-            return PersonSchema().load(data, many=False, partial=partial, unknown=unknown)
+            return self.wrap_class(PersonSchema)().load(data, many=False, partial=partial, unknown=unknown)
         else:
-            return OrganizationSchema().load(data, many=False, partial=partial, unknown=unknown)
+            return self.wrap_class(OrganizationSchema)().load(data, many=False, partial=partial, unknown=unknown)

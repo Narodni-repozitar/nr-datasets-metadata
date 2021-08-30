@@ -13,9 +13,7 @@ class TitlesSchema(Schema):
         "other"
     ]
     title = MultilingualStringV2(required=True)
-    title_type = SanitizedUnicode(
-        attr='titleType',
-        data_key='titleType',
+    titleType = SanitizedUnicode(
         required=True,
         validate=validate.OneOf(
             choices=NAMES,
@@ -45,13 +43,13 @@ class TitlesList(fields.List):
         main_title = False
 
         for item in value:
-            type = item['title_type']
+            type = item['titleType']
             if type == "mainTitle":
                 main_title = True
 
         if not main_title:
             raise ValidationError({
-                "title_type": _("At least one title must have type mainTitle")
+                "titleType": _("At least one title must have type mainTitle")
             })
 
         if not _no_duplicates(value):

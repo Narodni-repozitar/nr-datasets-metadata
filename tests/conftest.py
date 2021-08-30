@@ -412,7 +412,8 @@ def taxonomy_tree(app, db, taxonomy):
             "cs": "Reynoldsovo číslo",
             "en": "Reynolds number"
         },
-        "reletedURI": ["http://psh.techlib.cz/skos/PSH3001"],
+        # "relatedURI": ["http://psh.techlib.cz/skos/PSH3001"],     # TODO: duplication bug in taxonomies, commented out just for tests
+        "relatedURI": [],
         "DateRevised": "2007-01-26T16:14:37"
     })
 
@@ -422,7 +423,7 @@ def taxonomy_tree(app, db, taxonomy):
             "cs": "turbulentní proudění",
             "en": "turbulent flow"
         },
-        "reletedURI": ["http://psh.techlib.cz/skos/PSH3000"],
+        "relatedURI": ["http://psh.techlib.cz/skos/PSH3000"],
         "DateRevised": "2007-01-26T16:14:37"
     })
 
@@ -432,7 +433,7 @@ def taxonomy_tree(app, db, taxonomy):
             "cs": "pentany",
             "en": "Pentanes"
         },
-        "reletedURI": ["http://www.medvik.cz/link/D010420", "http://id.nlm.nih.gov/mesh/D010420"],
+        "relatedURI": ["http://www.medvik.cz/link/D010420", "http://id.nlm.nih.gov/mesh/D010420"],
         "DateRevised": "2007-01-26T16:14:37",
         "DateCreated": "2007-01-26T16:14:37",
         "DateDateEstablished": "2007-01-26T16:14:37",

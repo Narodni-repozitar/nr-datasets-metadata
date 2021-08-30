@@ -1,0 +1,572 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "authorityBase": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string"
+        },
+        "nameType": {
+          "type": "string",
+          "enum": [
+            "Organizational",
+            "Personal"
+          ]
+        },
+        "authorityIdentifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string"
+              },
+              "scheme": {
+                "type": "string",
+                "enum": [
+                  "orcid",
+                  "scopusID",
+                  "researcherID",
+                  "czenasAutID",
+                  "vedidk",
+                  "institutionalID",
+                  "ISNI",
+                  "ROR",
+                  "ICO",
+                  "DOI"
+                ]
+              }
+            },
+            "required": [
+              "identifier",
+              "scheme"
+            ],
+            "uniqueItems": true
+          }
+        }
+      },
+      "required": [
+        "fullName",
+        "nameType"
+      ]
+    },
+    "person": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/authorityBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nameType": {
+              "type": "string",
+              "enum": [
+                "Personal"
+              ]
+            },
+            "affiliation": {
+              "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
+              "description": "taxonomie institutions",
+              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow"
+            }
+          },
+          "required": [
+            "fullName"
+          ],
+          "uniqueItems": true
+        }
+      ]
+    },
+    "organization": {
+      "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
+      "$comment": "Alzp: Name of the property? Should be object?",
+      "allOf": [
+        {
+          "$ref": "#/definitions/authorityBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "description": "taxonomie institutions",
+            "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "authority": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/person"
+        },
+        {
+          "$ref": "#/definitions/organization"
+        }
+      ]
+    },
+    "objectPIDs": {
+      "description": "Persistent identifier/s of object",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string",
+          "enum": [
+            "DOI",
+            "Handle",
+            "ISBN",
+            "ISSN",
+            "RIV"
+          ]
+        }
+      },
+      "required": [
+        "identifier",
+        "scheme"
+      ],
+      "uniqueItems": true
+    },
+    "dateOrRange": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "year"
+        },
+        {
+          "format": "yearmonth"
+        },
+        {
+          "format": "date"
+        },
+        {
+          "format": "datetime"
+        },
+        {
+          "format": "year-range"
+        },
+        {
+          "format": "yearmonth-range"
+        },
+        {
+          "format": "date-range"
+        },
+        {
+          "format": "datetime-range"
+        }
+      ]
+    },
+    "date": {
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "year"
+        },
+        {
+          "format": "yearmonth"
+        },
+        {
+          "format": "date"
+        },
+        {
+          "format": "datetime"
+        }
+      ]
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "DataSet": {
+      "id": "#dataset",
+      "title": "OARepoRDM DataSet v3.0.0",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "titles": {
+          "description": "Titles of the object/work.",
+          "$comment": "MARSHMALLOW: required mainTitle",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
+              },
+              "titleType": {
+                "type": "string",
+                "enum": [
+                  "mainTitle",
+                  "alternativeTitle",
+                  "subtitle",
+                  "other"
+                ]
+              }
+            },
+            "required": [
+              "title",
+              "titleType"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "creators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/authority"
+          },
+          "required": [
+            "fullName"
+          ],
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "contributors": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/authority"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+                  }
+                }
+              }
+            ],
+            "required": [
+              "fullName",
+              "role"
+            ],
+            "uniqueItems": true
+          }
+        },
+        "resourceType": {
+          "$comment": "MARSHMALLOW: required pouze 1 hodnota z taxonomie, tj. min 1, max 1",
+          "description": "Taxonomy driven typology of objects that's possible to store in the repository",
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+        },
+        "dateAvailable": {
+          "description": "The date the resource is made publicly available.",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "$comment1": "podle něj se bude řídit embargo, takže vyplní se datum, kdy mají být data v repozitáři veřejná (dataset access rights = open access); převzáno z datacite",
+          "$comment2": "publicationYear, který je pro datacite povinný se bude generovat v oai-pmh z tohohle pole",
+          "$ref": "#/definitions/date"
+        },
+        "dateModified": {
+          "description": "The date of the last update to the resource, not metadata",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "$comment1": "neukazuje se ve vkládacím formuláři. jen při editaci záznamu!",
+          "$ref": "#/definitions/date"
+        },
+        "dateCollected": {
+          "description": "The date or date range in which the resource content was collected. To indicate precise or particular timeframes in which research was conducted.",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "$ref": "#/definitions/dateOrRange"
+        },
+        "dateCreated": {
+          "description": "The date the resource itself was put together; this could refer to a timeframe in ancient history, a date range, or a single date for a final component, e.g., the finalised file with all the data.",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "$ref": "#/definitions/dateOrRange"
+        },
+        "dateValidTo": {
+          "description": "The date during which the dataset or resource is accurate.",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "$ref": "#/definitions/date"
+        },
+        "dateWithdrawn": {
+          "description": "The date the resource is removed + description that indicates the reason for the retraction or withdrawal.",
+          "$comment": "týká se datasetu, nikoliv metadat!!!",
+          "type": "object",
+          "properties": {
+            "dateInformation": {
+              "type": "string"
+            },
+            "date": {
+              "$ref": "#/definitions/dateOrRange"
+            }
+          }
+        },
+        "keywords": {
+          "description": "free-form keywords, often created by author(s)",
+          "type": "array",
+          "items": {
+            "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
+          }
+        },
+        "subjectCategories": {
+          "description": "konspekt nebo jiné oborové třídění - poslouží jako podklad pro oborové clustery",
+          "$comment": "PETRA TO DO: potřeba něco převzít/vytvořit vlastní taxonomii",
+          "$comment": "Alzp: Name changed to categories",
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "language": {
+          "description": "ISO 639-2 B in slug, ISO 639-2 T in alias, ISO 639-1 as Alpha2.",
+          "$comment": "Alpha2 se bude exportovat pro datacite",
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
+          "uniqueItems": true
+        },
+        "notes": {
+          "description": "Free-form note for any comment that couldn't be inserted in any other field.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "abstract": {
+          "description": "Multilingual abstract description for record (may contain HTML).",
+          "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
+          "uniqueItems": true
+        },
+        "methods": {
+          "description": "Multilingual methodology employed for the study or research.(may contain HTML)",
+          "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
+          "uniqueItems": true
+        },
+        "technicalInfo": {
+          "description": "Multilingual detailed information that may be associated with design, implementation, operation, use, and/or maintenance of a process or system.(may contain HTML)",
+          "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
+          "uniqueItems": true
+        },
+        "rights": {
+          "description": "Any license or copyright information for this resource. Taxonomy field.",
+          "$comment": "zkontrolovat, jestli naše struktura je dobře exportovatelná do DATACITE",
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
+          "uniqueItems": true
+        },
+        "accessRights": {
+          "description": "Taxonomy driven list of possible access to the document - open, embargoed, restirected and metadata only access. Based on COAR vocabulary - http://vocabularies.coar-repositories.org/documentation/access_rights/",
+          "$comment": "Pokud není vypublikovaný, tak restricted. Po vypublikování pokud dateAvailable je v budoucnosti, tak embargoed. Jinak Open Access.",
+          "$comment2": "Zvážit, pokud to není syntetické pole",
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+        },
+        "relatedItems": {
+          "description": "pole pro linkdata, provázání částí a celku nebo jinak přidružených dokumentů a datasetů. předpokládá se u dizertací vydaných jako knih, příspěvky ve sborníku na sborník, článek na časopis, kapitola na knihu, recenze na článek nebo knihu, dataset na článek,...",
+          "$comment": "V BUDOUCNOSTI: bylo by dobré naškálovat pro některé related typy dokumentů různá povinná pole - př. pokud je related item book, tak chci isbn. pokud časopis chci číslo, ročník; viz komenty níže.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "itemTitle": {
+                "description": "název propojeného dokumentu - časopisu, knihy, článku u recenze, ...",
+                "type": "string"
+              },
+              "itemCreators": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/authority"
+                },
+                "required": [
+                  "fullName"
+                ],
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "itemContributors": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/authority"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "role": {
+                          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "required": [
+                  "fullName"
+                ],
+                "uniqueItems": true
+              },
+              "itemPIDs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/objectPIDs",
+                  "required": [
+                    "identifier",
+                    "scheme"
+                  ],
+                  "uniqueItems": true
+                }
+              },
+              "itemURL": {
+                "type": "string",
+                "format": "URL"
+              },
+              "itemYear": {
+                "$comment": "při slučování modelů se bude muset doplnit: if itemResourceType = dataset then use dateAvailable, else use dateIssued",
+                "$ref": "#/definitions/date"
+              },
+              "itemVolume": {
+                "$comment": "if itemResourceType = journal then required",
+                "type": "string"
+              },
+              "itemIssue": {
+                "$comment": "if itemResourceType = journal then required",
+                "type": "string"
+              },
+              "itemStartPage": {
+                "$comment": "if itemResourceType = journal/book then required",
+                "type": "string"
+              },
+              "itemEndPage": {
+                "$comment": "if itemResourceType = journal/book then required",
+                "type": "string"
+              },
+              "itemPublisher": {
+                "type": "string"
+              },
+              "itemRelationType": {
+                "description": "typ vztahu k původnímu popisovanému dok.",
+                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+              },
+              "itemResourceType": {
+                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+              }
+            },
+            "required": [
+              "itemTitle",
+              "itemCreators",
+              "itemYear",
+              "itemRelationType",
+              "itemResourceType"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "fundingReferences": {
+          "description": "informace o přidruženém projektu",
+          "$comment": "u českých projektů na základě prvních dvou znaků v řetězci s identifikátorem projektu lze přiřadit poskytovatele",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "projectID": {
+                "type": "string"
+              },
+              "projectName": {
+                "type": "string"
+              },
+              "fundingProgram": {
+                "type": "string"
+              },
+              "funder": {
+                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
+              }
+            },
+            "required": [
+              "projectID",
+              "funder"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "version": {
+          "$comment": "hodnota ve formuláři není editovatelná. při uploadu dat nutnost změnit verzi, pokud data ještě nebyla 1.0.0",
+          "type": "string"
+        },
+        "geoLocations": {
+          "type": "array",
+          "$comment": "Alzp: Name of required value changed from place to geoLocationPlace",
+          "items": {
+            "type": "object",
+            "properties": {
+              "geoLocationPlace": {
+                "description": "Free description of the location; ie. Atlantic Ocean",
+                "type": "string"
+              },
+              "geoLocationPoint": {
+                "type": "object",
+                "properties": {
+                  "pointLongitude": {
+                    "$ref": "#/definitions/longitude"
+                  },
+                  "pointLatitude": {
+                    "$ref": "#/definitions/latitude"
+                  }
+                },
+                "required": [
+                  "pointLongitude",
+                  "pointLatitude"
+                ]
+              }
+            },
+            "required": [
+              "geoLocationPlace"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "InvenioID": {
+          "description": "identifikátor záznamu automaticky přiřazovaný inveniem",
+          "type": "string"
+        },
+        "persistentIdentifiers": {
+          "description": "Persistent identifier/s of object assigned by National Repository. Status needed for DOI requests.",
+          "type": "array",
+          "$comment": "Alzp: shouldn't be property status set as optional, since is used only in DOI request use case?",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/objectPIDs"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "description": "Status of an identifier (e.g. requested, registered, external...)",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            ],
+            "required": [
+              "identifier",
+              "scheme",
+              "status"
+            ],
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      },
+      "required": [
+        "titles",
+        "creators",
+        "dateAvailable",
+        "resourceType",
+        "accessRights",
+        "abstract",
+        "subjectCategories"
+      ]
+    }
+  }
+}

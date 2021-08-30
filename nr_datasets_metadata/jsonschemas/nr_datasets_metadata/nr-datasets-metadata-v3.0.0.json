@@ -522,10 +522,6 @@
           },
           "uniqueItems": true
         },
-        "InvenioID": {
-          "description": "identifikátor záznamu automaticky přiřazovaný inveniem",
-          "type": "string"
-        },
         "persistentIdentifiers": {
           "description": "Persistent identifier/s of object assigned by National Repository. Status needed for DOI requests.",
           "type": "array",

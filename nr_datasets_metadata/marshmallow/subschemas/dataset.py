@@ -59,9 +59,6 @@ class DataSetMetadataSchemaV3(Schema):
 
     geoLocations = fields.List(fields.Nested(GeoLocationSchema))
 
-    # should be part of invenio schema
-    InvenioID = fields.String()
-
     persistentIdentifiers = fields.List(
         fields.Nested(partial(PersistentIdentifierSchema, allowed_schemes=RDM_RECORDS_IDENTIFIERS_SCHEMES)),
         validate=[no_duplicates, not_empty]

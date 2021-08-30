@@ -290,9 +290,6 @@
           }
         }
       },
-      "InvenioID": {
-        "type": "keyword"
-      },
       "persistentIdentifiers": {
         "type": "object",
         "properties": {

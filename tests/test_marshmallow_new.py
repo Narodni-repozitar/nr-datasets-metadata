@@ -263,7 +263,7 @@ def test_contributor(app, db, taxonomy_tree):
 def test_whole_marshmallow(app, db, taxonomy_tree):
     assert_schema_passing(
         DataSetMetadataSchemaV3,
-        {'InvenioID': '1',
+        {
          'abstract': {'cs': 'kchc'},
          'accessRights': [{'is_ancestor': False,
                            'level': 1,

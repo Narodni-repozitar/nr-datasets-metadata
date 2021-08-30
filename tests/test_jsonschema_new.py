@@ -101,21 +101,21 @@ def test_json(app):
             "dateWithdrawn": {"date": "1970", "dateInformation": "informace"},
             "keywords": [{"cs": "jej", "en-us": "yey"}, {"cs": "jejj", "en-us": "yey!"}],
             "language": [{"termin": "termin"}],
-            "note": ["nota1", "nota2"],
+            "notes": ["nota1", "nota2"],
             "methods": {"en": "method"},
             "technicalInfo": {"de": "das TechnicalInfo"},
             "rights": [{"termin": "termin"}],
-            "relatedItem":
+            "relatedItems":
                 [{
                     "itemTitle": "titulek",
-                    "itemCreator": [
+                    "itemCreators": [
                         {"nameType": "Personal",
                          "affiliaton": [{"termin": "termin"}],
                          "fullName": "Alzbeta Pokorna",
                          "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
                          }
                     ],
-                    "itemContributor": [
+                    "itemContributors": [
                         {"nameType": "Personal",
                          "affiliaton": [{"termin": "termin"}],
                          "fullName": "Alzbeta Pokorna",
@@ -133,10 +133,10 @@ def test_json(app):
                     "itemRelationType": [{"termin": "termin"}],
                     "itemResourceType": [{"termin": "termin"}]
                 }],
-            "fundingReference": [
+            "fundingReferences": [
                 {"projectID": "kch", "projectName": "kk", "fundingProgram": "jeeej", "funder": [{"termin": "termin"}]}],
             "version": "jeeej",
-            "geoLocation": [{
+            "geoLocations": [{
                 "geoLocationPlace": "place",
                 "geoLocationPoint": {"pointLongitude": 100, "pointLatitude": 0}
             }],

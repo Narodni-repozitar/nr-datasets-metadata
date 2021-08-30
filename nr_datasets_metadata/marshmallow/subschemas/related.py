@@ -12,8 +12,8 @@ from nr_datasets_metadata.marshmallow.subschemas.utils import not_empty
 
 class RelatedItemSchema(Schema):
     itemTitle = SanitizedUnicode(required=True)
-    itemCreator = fields.List(fields.Nested(CreatorSchema), required=True, validate=[not_empty])
-    itemContributor = fields.List(fields.Nested(ContributorSchema))
+    itemCreators = fields.List(fields.Nested(CreatorSchema), required=True, validate=[not_empty])
+    itemContributors = fields.List(fields.Nested(ContributorSchema))
     itemPIDs = fields.List(fields.Nested(IdentifierSchema(
         allowed_schemes=RDM_RECORDS_IDENTIFIERS_SCHEMES
     )))

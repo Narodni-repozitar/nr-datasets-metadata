@@ -132,7 +132,7 @@
       "accessRights": {
         "type": "taxonomy-term"
       },
-      "relatedItem": {
+      "relatedItems": {
         "type": "object",
         "properties": {
           "itemTitle": {
@@ -241,7 +241,7 @@
           }
         }
       },
-      "fundingReference": {
+      "fundingReferences": {
         "type": "object",
         "properties": {
           "projectID": {
@@ -261,7 +261,7 @@
       "version": {
         "type": "keyword"
       },
-      "geoLocation": {
+      "geoLocations": {
         "type": "object",
         "properties": {
           "geoLocationPlace": {

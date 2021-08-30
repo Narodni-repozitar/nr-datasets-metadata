@@ -39,7 +39,7 @@ class DataSetMetadataSchemaV3(Schema):
 
     language = TaxonomyField()
 
-    note = fields.List(fields.String(), validate=[no_duplicates])
+    notes = fields.List(fields.String(), validate=[no_duplicates])
 
     abstract = MultilingualStringV2(required=True)
 
@@ -53,11 +53,11 @@ class DataSetMetadataSchemaV3(Schema):
 
     relatedItems = fields.List(fields.Nested(RelatedItemSchema))
 
-    fundingReference = fields.List(fields.Nested(FundingReference), validate=[no_duplicates])
+    fundingReferences = fields.List(fields.Nested(FundingReference), validate=[no_duplicates])
 
     version = fields.String()
 
-    geoLocation = fields.List(fields.Nested(GeoLocationSchema))
+    geoLocations = fields.List(fields.Nested(GeoLocationSchema))
 
     # should be part of invenio schema
     InvenioID = fields.String()
@@ -66,5 +66,3 @@ class DataSetMetadataSchemaV3(Schema):
         fields.Nested(partial(PersistentIdentifierSchema, allowed_schemes=RDM_RECORDS_IDENTIFIERS_SCHEMES)),
         validate=[no_duplicates, not_empty]
         )
-
-    # todo oarepo veci ??

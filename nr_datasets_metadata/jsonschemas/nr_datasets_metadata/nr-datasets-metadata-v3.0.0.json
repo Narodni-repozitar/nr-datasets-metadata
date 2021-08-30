@@ -66,12 +66,9 @@
               ]
             },
             "affiliation": {
+              "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
               "description": "taxonomie institutions",
-              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow",
-              "type": "array",
-              "items": {
-                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-              }
+              "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow"
             }
           },
           "required": [
@@ -81,7 +78,7 @@
         }
       ]
     },
-    "organisation": {
+    "organization": {
       "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
       "$comment": "Alzp: Name of the property? Should be object?",
       "allOf": [
@@ -104,7 +101,7 @@
           "$ref": "#/definitions/person"
         },
         {
-          "$ref": "#/definitions/organisation"
+          "$ref": "#/definitions/organization"
         }
       ]
     },
@@ -268,9 +265,7 @@
           "$comment": "týká se datasetu, nikoliv metadat!!!",
           "$comment1": "podle něj se bude řídit embargo, takže vyplní se datum, kdy mají být data v repozitáři veřejná (dataset access rights = open access); převzáno z datacite",
           "$comment2": "publicationYear, který je pro datacite povinný se bude generovat v oai-pmh z tohohle pole",
-          "$comment3": "Alzp: minItems?",
-          "$ref": "#/definitions/date",
-          "minItems": 1
+          "$ref": "#/definitions/date"
         },
         "dateModified": {
           "description": "The date of the last update to the resource, not metadata",
@@ -296,7 +291,6 @@
         "dateWithdrawn": {
           "description": "The date the resource is removed + description that indicates the reason for the retraction or withdrawal.",
           "$comment": "týká se datasetu, nikoliv metadat!!!",
-          "$comment": "Alzp: Type changed from allOf which wasn't usable in this case (hope so) to one object that includes date ",
           "type": "object",
           "properties": {
             "dateInformation": {
@@ -326,10 +320,9 @@
           "description": "ISO 639-2 B in slug, ISO 639-2 T in alias, ISO 639-1 as Alpha2.",
           "$comment": "Alpha2 se bude exportovat pro datacite",
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
-          "minItems": 1,
           "uniqueItems": true
         },
-        "note": {
+        "notes": {
           "description": "Free-form note for any comment that couldn't be inserted in any other field.",
           "type": "array",
           "items": {
@@ -340,7 +333,6 @@
         "abstract": {
           "description": "Multilingual abstract description for record (may contain HTML).",
           "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
-          "minItems": 1,
           "uniqueItems": true
         },
         "methods": {
@@ -365,7 +357,7 @@
           "$comment2": "Zvážit, pokud to není syntetické pole",
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
         },
-        "relatedItem": {
+        "relatedItems": {
           "description": "pole pro linkdata, provázání částí a celku nebo jinak přidružených dokumentů a datasetů. předpokládá se u dizertací vydaných jako knih, příspěvky ve sborníku na sborník, článek na časopis, kapitola na knihu, recenze na článek nebo knihu, dataset na článek,...",
           "$comment": "V BUDOUCNOSTI: bylo by dobré naškálovat pro některé related typy dokumentů různá povinná pole - př. pokud je related item book, tak chci isbn. pokud časopis chci číslo, ročník; viz komenty níže.",
           "type": "array",
@@ -377,7 +369,7 @@
                 "description": "název propojeného dokumentu - časopisu, knihy, článku u recenze, ...",
                 "type": "string"
               },
-              "itemCreator": {
+              "itemCreators": {
                 "type": "array",
                 "items": {
                   "$ref": "#/definitions/authority"
@@ -388,7 +380,7 @@
                 "minItems": 1,
                 "uniqueItems": true
               },
-              "itemContributor": {
+              "itemContributors": {
                 "type": "array",
                 "items": {
                   "allOf": [
@@ -458,7 +450,7 @@
             },
             "required": [
               "itemTitle",
-              "itemCreator",
+              "itemCreators",
               "itemYear",
               "itemRelationType",
               "itemResourceType"
@@ -466,7 +458,7 @@
           },
           "uniqueItems": true
         },
-        "fundingReference": {
+        "fundingReferences": {
           "description": "informace o přidruženém projektu",
           "$comment": "u českých projektů na základě prvních dvou znaků v řetězci s identifikátorem projektu lze přiřadit poskytovatele",
           "type": "array",
@@ -498,7 +490,7 @@
           "$comment": "hodnota ve formuláři není editovatelná. při uploadu dat nutnost změnit verzi, pokud data ještě nebyla 1.0.0",
           "type": "string"
         },
-        "geoLocation": {
+        "geoLocations": {
           "type": "array",
           "$comment": "Alzp: Name of required value changed from place to geoLocationPlace",
           "items": {

@@ -326,7 +326,7 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
          'dateModified': '1999',
          'dateValidTo': '1996-10',
          'dateWithdrawn': {'date': '1970', 'dateInformation': 'informace'},
-         'fundingReference': [{'funder': [{'funderISVaVaICode': '123456789',
+         'fundingReferences': [{'funder': [{'funderISVaVaICode': '123456789',
                                            'is_ancestor': False,
                                            'level': 1,
                                            'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/ntk'},
@@ -336,7 +336,7 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
                                'fundingProgram': 'jeeej',
                                'projectID': 'kch',
                                'projectName': 'kk'}],
-         'geoLocation': [{'geoLocationPlace': 'place',
+         'geoLocations': [{'geoLocationPlace': 'place',
                           'geoLocationPoint': {'pointLatitude': 0,
                                                'pointLongitude': 100}}],
          'keywords': [{'cs': 'jej', 'en': 'yey'}, {'cs': 'jejj', 'en': 'yey!'}],
@@ -345,11 +345,11 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
                        'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/cze'},
                        'title': {'cs': 'čeština', 'en': 'Czech'}}],
          'methods': {'en': 'method'},
-         'note': ['nota1', 'nota2'],
+         'notes': ['nota1', 'nota2'],
          'persistentIdentifiers': [{'identifier': '10.1038/nphys1170',
                                     'scheme': 'doi',
                                     'status': 'requested'}],
-         'relatedItems': [{'itemContributor': [{'affiliation': [{'address': 'Malostranské '
+         'relatedItems': [{'itemContributors': [{'affiliation': [{'address': 'Malostranské '
                                                                             'náměstí '
                                                                             '259/12, '
                                                                             '118 00 '
@@ -387,7 +387,7 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
                                                               'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/supervisor'},
                                                           'title': {'cs': 'supervizor',
                                                                     'en': 'supervisor'}}]}],
-                           'itemCreator': [{'affiliation': [{'address': 'Malostranské '
+                           'itemCreators': [{'affiliation': [{'address': 'Malostranské '
                                                                         'náměstí '
                                                                         '259/12, 118 '
                                                                         '00 Praha 1',

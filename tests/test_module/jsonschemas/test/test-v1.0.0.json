@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "these": {
-            "$ref": "https://narodni-repozitar.cz/schemas/nr_datasets_metadata/nr-datasets-metadata-v2.0.0.json#/definitions/DataSet"
+            "$ref": "https://narodni-repozitar.cz/schemas/nr_datasets_metadata/nr-datasets-metadata-v3.0.0.json#/definitions/DataSet"
       }
   }
 

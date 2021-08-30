@@ -1,0 +1,312 @@
+{
+  "mappings": {
+    "type": "object",
+    "properties": {
+      "titles": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "multilingual"
+          },
+          "titleType": {
+            "type": "keyword"
+          }
+        }
+      },
+      "creators": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "keyword"
+              },
+              "nameType": {
+                "type": "keyword"
+              },
+              "authorityIdentifiers": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "keyword"
+                  },
+                  "scheme": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "affiliation": {
+                "type": "taxonomy-term"
+              }
+            }
+          }
+        }
+      },
+      "contributors": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "keyword"
+              },
+              "nameType": {
+                "type": "keyword"
+              },
+              "authorityIdentifiers": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "keyword"
+                  },
+                  "scheme": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "affiliation": {
+                "type": "taxonomy-term"
+              }
+            }
+          },
+          "role": {
+            "type": "taxonomy-term"
+          }
+        }
+      },
+      "resourceType": {
+        "type": "keyword"
+      },
+      "dateAvailable": {
+        "type": "date"
+      },
+      "dateModified": {
+        "type": "date"
+      },
+      "dateCollected": {
+        "type": "date"
+      },
+      "dateCreated": {
+        "type": "date"
+      },
+      "dateValidTo": {
+        "type": "date"
+      },
+      "dateWithdrawn": {
+        "type": "object",
+        "properties": {
+          "dateInformation": {
+            "type": "keyword"
+          },
+          "date": {
+            "type": "date"
+          }
+        }
+      },
+      "keywords": {
+        "type": "multilingual"
+      },
+      "subjectCategories": {
+        "type": "taxonomy-term"
+      },
+      "language": {
+        "type": "taxonomy-term"
+      },
+      "notes": {
+        "type": "keyword"
+      },
+      "abstract": {
+        "type": "multilingual"
+      },
+      "methods": {
+        "type": "multilingual"
+      },
+      "technicalInfo": {
+        "type": "multilingual"
+      },
+      "rights": {
+        "type": "taxonomy-term"
+      },
+      "accessRights": {
+        "type": "taxonomy-term"
+      },
+      "relatedItem": {
+        "type": "object",
+        "properties": {
+          "itemTitle": {
+            "type": "keyword"
+          },
+          "itemURL": {
+            "type": "keyword"
+          },
+          "itemYear": {
+            "type": "keyword"
+          },
+          "itemVolume": {
+            "type": "keyword"
+          },
+          "itemIssue": {
+            "type": "keyword"
+          },
+          "itemStartPage": {
+            "type": "keyword"
+          },
+          "itemEndPage": {
+            "type": "keyword"
+          },
+          "itemPublisher": {
+            "type": "keyword"
+          },
+          "itemRelationType": {
+            "type": "taxonomy-term"
+          },
+          "itemResourceType": {
+            "type": "taxonomy-term"
+          },
+          "itemCreators": {
+            "type": "object",
+            "properties": {
+              "authority": {
+                "type": "object",
+                "properties": {
+                  "fullName": {
+                    "type": "keyword"
+                  },
+                  "nameType": {
+                    "type": "keyword"
+                  },
+                  "authorityIdentifiers": {
+                    "type": "object",
+                    "properties": {
+                      "identifier": {
+                        "type": "keyword"
+                      },
+                      "scheme": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "affiliation": {
+                    "type": "taxonomy-term"
+                  }
+                }
+              }
+            }
+          },
+          "itemContributors": {
+            "type": "object",
+            "properties": {
+              "authority": {
+                "type": "object",
+                "properties": {
+                  "fullName": {
+                    "type": "keyword"
+                  },
+                  "nameType": {
+                    "type": "keyword"
+                  },
+                  "authorityIdentifiers": {
+                    "type": "object",
+                    "properties": {
+                      "identifier": {
+                        "type": "keyword"
+                      },
+                      "scheme": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "affiliation": {
+                    "type": "taxonomy-term"
+                  }
+                }
+              },
+              "role": {
+                "type": "taxonomy-term"
+              }
+            }
+          },
+          "itemPIDs": {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "fundingReference": {
+        "type": "object",
+        "properties": {
+          "projectID": {
+            "type": "keyword"
+          },
+          "projectName": {
+            "type": "keyword"
+          },
+          "fundingProgram": {
+            "type": "keyword"
+          },
+          "funder": {
+            "type": "taxonomy-term"
+          }
+        }
+      },
+      "version": {
+        "type": "keyword"
+      },
+      "geoLocation": {
+        "type": "object",
+        "properties": {
+          "geoLocationPlace": {
+            "type": "keyword"
+          },
+          "geoLocationPoint": {
+            "type": "object",
+            "properties": {
+              "pointLongitude": {
+                "type": "object",
+                "properties": {
+                  "longitude": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "pointLatitude": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "InvenioID": {
+        "type": "keyword"
+      },
+      "persistentIdentifiers": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "keyword"
+          },
+          "status": {
+            "type": "keyword"
+          },
+          "scheme": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}

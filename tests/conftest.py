@@ -327,7 +327,7 @@ def taxonomy_tree(app, db, taxonomy):
             "en": "Academy of Performing Arts in Prague"
         },
         "type": "veřejná VŠ",
-        "aliases": ["AMU"],
+        # "aliases": ["AMU"],   # TODO: duplication in taxonomy validation - need to migrate to new taxonomies
         "related": {
             "rid": "51000"
         },
@@ -491,6 +491,13 @@ def taxonomy_tree(app, db, taxonomy):
     term16 = current_flask_taxonomies.create_term(id16, extra_data={
         "title": {
             "cs": "Licence Creative Commons",
+        }
+    })
+
+    id17 = TermIdentification(taxonomy=taxonomy, slug="article")
+    term17 = current_flask_taxonomies.create_term(id17, extra_data={
+        "title": {
+            "cs": "Article",
         }
     })
 

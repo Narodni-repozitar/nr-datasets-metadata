@@ -9,6 +9,6 @@
 
 from __future__ import absolute_import, print_function
 
-from .json import DatasetMetadataSchemaV1
+from .subschemas.dataset import DataSetMetadataSchemaV3
 
-__all__ = ('DatasetMetadataSchemaV1',)
+__all__ = ('DataSetMetadataSchemaV3',)

@@ -17,148 +17,135 @@ def get_schema():
             schema = json.load(file)
 
     return schema
+
+
 def test_json(app):
     """Test of json schema with app."""
 
     schema = app.extensions['invenio-records']
 
-    #bare minimum
-    data = json.loads('{"these": '
-                      '{'
-                      '"InvenioID": "1",'
-                      '"titles" : [{"title": {"cs" : "jeej"}, "titleType": "mainTitle"}], '
-                      '"creator" : ['
-                            '{"nameType": "Personal", '
-                            '"affiliatoin": [{"termin": "termin"}], '
-                            '"fullName": "Alzbeta Pokorna", '
-                            '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                            '}'
-                        '],'
-                      '"dateAvailable": "1970",'
-                      '"resourceType": [{"termin": "termin"}],'
-                      '"accessRights" : [{"termin": "termin"}],'
-                      '"abstract" : {"cs": "kchc"},'
-                      '"subjectCategories": [{"termin": "termin"}] '
-                      '}'
-                      '}')
+    # bare minimum
+    data = {"these":
+        {
+            "InvenioID": "1",
+            "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"}],
+            "creators": [
+                {"nameType": "Personal",
+                 "affiliatoin": [{"termin": "termin"}],
+                 "fullName": "Alzbeta Pokorna",
+                 "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                 }
+            ],
+            "dateAvailable": "1970",
+            "resourceType": [{"termin": "termin"}],
+            "accessRights": [{"termin": "termin"}],
+            "abstract": {"cs": "kchc"},
+            "subjectCategories": [{"termin": "termin"}]
+        }
+    }
 
     schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
 
-    #organization todo
-    data = json.loads('{"these": '
-                      '{'
-                      '"InvenioID": "1",'
-                      '"titles" : [{"title": {"cs" : "jeej"}, "titleType": "mainTitle"}], '
-                      '"creator" : ['
-                      '{"nameType": "Personal", '
-                      '"affiliation": [{"termin": "termin"}], '
-                      '"fullName": "Alzbeta Pokorna", '
-                      '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                      '}'
-                      '],'
-                      '"dateAvailable": "1970",'
-                      '"resourceType": [{"termin": "termin"}],'
-                      '"accessRights" : [{"termin": "termin"}],'
-                      '"abstract" : {"cs": "kchc"},'
-                      '"subjectCategories": [{"termin": "termin"}] '
-                      '}'
-                      '}')
+    # organization todo
+    data = {"these":
+        {
+            "InvenioID": "1",
+            "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"}],
+            "creators": [
+                {"nameType": "Personal",
+                 "affiliation": [{"termin": "termin"}],
+                 "fullName": "Alzbeta Pokorna",
+                 "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                 }
+            ],
+            "dateAvailable": "1970",
+            "resourceType": [{"termin": "termin"}],
+            "accessRights": [{"termin": "termin"}],
+            "abstract": {"cs": "kchc"},
+            "subjectCategories": [{"termin": "termin"}]
+        }
+    }
 
     schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
 
-    #all properties used
-    data = json.loads('{"these": '
-                      '{'
-                      '"InvenioID": "1",'
-                      '"titles" : [{"title": {"cs" : "jeej"}, "titleType": "mainTitle"},{"title": {"cs" : "jeej"}, "titleType": "subtitle"}], '
-                      '"creator" : ['
-                      '{"nameType": "Personal", '
-                      '"affiliaton": [{"termin": "termin"}], '
-                      '"fullName": "Alzbeta Pokorna", '
-                      '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                      '}'
-                      '],'
-                      '"contributor" : ['
-                      '{"nameType": "Personal", '
-                      '"affiliaton": [{"termin": "termin"}], '
-                      '"fullName": "Alzbeta Pokorna",'
-                      '"role": [{"termin": "termin"}], '
-                      '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                      '}'
-                      '],'
-                      '"dateAvailable": "1970",'
-                      '"resourceType": [{"termin": "termin"}],'
-                      '"accessRights" : [{"termin": "termin"}],'
-                      '"abstract" : {"cs": "kchc"},'
-                      '"subjectCategories": [{"termin": "termin"}],'
-                      '"dateModified" : "1999",'
-                      '"dateCollected" : "2018-03",'
-                      '"dateCreated": "1996-10-12",'
-                      '"dateValidTo": "xxxxxxxxxx",' #todo: json nevaliduje, marshmallow
-                      '"dateWithdrawn" : {"date" : "1970", "dateInformation": "informace"},'
-                      '"keywords": [{"cs" : "jej", "en-us": "yey"}, {"cs" : "jejj", "en-us": "yey!"}],'
-                      '"language": [{"termin": "termin"}],'
-                      '"note": ["nota1", "nota2"],'
-                      '"methods": {"en" : "method"},'
-                      '"technicalInfo" : {"de" : "das TechnicalInfo"},'
-                      '"rights" : [{"termin": "termin"}],'
-                      '"accessRights" : [{"termin": "termin"}],'
-                      '"relatedItem" : '
-                      '[{'
-                        '"itemTitle": "titulek",'
-                        '"itemCreator" : ['
-                            '{"nameType": "Personal", '
-                            '"affiliaton": [{"termin": "termin"}], '
-                            '"fullName": "Alzbeta Pokorna", '
-                            '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                            '}'
-                        '],'
-                        '"itemContributor":  ['
-                            '{"nameType": "Personal", '
-                            '"affiliaton": [{"termin": "termin"}], '
-                            '"fullName": "Alzbeta Pokorna", '
-                            '"role": [{"termin": "termin"}], '
-                            '"authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]'
-                            '}'
-                        '],'
-                      '"itemPIDs": [{"identifier" : "jej", "scheme": "DOI"}],'
-                      '"itemYear": "1970",'
-                      '"itemVolume": "volume",'
-                      '"itemIssue": "issue",'
-                      '"itemStartPage":"start",'
-                      '"itemEndPage": "konec",'
-                      '"itemPublisher" : "publisher",'
-                      '"itemRelationType": [{"termin": "termin"}],'
-                      '"itemResourceType": [{"termin": "termin"}]'  
-                      '}],'
-                      '"fundingReference": [{"projectID": "kch", "projectName" : "kk", "fundingProgram" : "jeeej", "funder" : [{"termin": "termin"}]}],'
-                      '"version" : "jeeej",'
-                      '"geoLocation": [{'
-                        '"geoLocationPlace": "place", '
-                        '"geoLocationPoint": { "pointLongitude": 100, "pointLatitude": 0}'
-                      '}],'
-                      '"persistentIdentifiers" : [{"identifier": "jej", "scheme": "DOI", "status" : "requested"}],'
-                      '"oarepo:submitter": "jej",'
-                      '"oarepo:recordStatus": "approved",'
-                      '"oarepo:communities": ["kcj"],'
-                      '"oarepo:primaryCommunity": "jej",'
-                      '"_files": {'
-                      '"versionID": "xx", '
-                      '"bucketID": "yyy", '
-                      ' "checksum": "zzz", '
-                      '"size": 123, '
-                      '"file_id" : "kchckc", '
-                      '"key": "jej",'
-                      '"mimeType": "jej", '
-                      '"url": "www.jej.cz", '
-                      '"accessRights": [{"termin": "termin"}], '
-                      '"fileNote": [{"description": "popis", "type" : true}],'
-                      '"objectType" : "dataset"}' 
-                      '}'
-                      '}')
+    # all properties used
+    data = {"these":
+        {
+            "InvenioID": "1",
+            "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"},
+                       {"title": {"cs": "jeej"}, "titleType": "subtitle"}],
+            "creators": [
+                {"nameType": "Personal",
+                 "affiliaton": [{"termin": "termin"}],
+                 "fullName": "Alzbeta Pokorna",
+                 "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                 }
+            ],
+            "contributors": [
+                {"nameType": "Personal",
+                 "affiliaton": [{"termin": "termin"}],
+                 "fullName": "Alzbeta Pokorna",
+                 "role": [{"termin": "termin"}],
+                 "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                 }
+            ],
+            "dateAvailable": "1970",
+            "resourceType": [{"termin": "termin"}],
+            "accessRights": [{"termin": "termin"}],
+            "abstract": {"cs": "kchc"},
+            "subjectCategories": [{"termin": "termin"}],
+            "dateModified": "1999",
+            "dateCollected": "2018-03",
+            "dateCreated": "1996-10-12",
+            "dateValidTo": "xxxxxxxxxx",  # todo: json nevaliduje, marshmallow
+            "dateWithdrawn": {"date": "1970", "dateInformation": "informace"},
+            "keywords": [{"cs": "jej", "en-us": "yey"}, {"cs": "jejj", "en-us": "yey!"}],
+            "language": [{"termin": "termin"}],
+            "note": ["nota1", "nota2"],
+            "methods": {"en": "method"},
+            "technicalInfo": {"de": "das TechnicalInfo"},
+            "rights": [{"termin": "termin"}],
+            "relatedItem":
+                [{
+                    "itemTitle": "titulek",
+                    "itemCreator": [
+                        {"nameType": "Personal",
+                         "affiliaton": [{"termin": "termin"}],
+                         "fullName": "Alzbeta Pokorna",
+                         "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                         }
+                    ],
+                    "itemContributor": [
+                        {"nameType": "Personal",
+                         "affiliaton": [{"termin": "termin"}],
+                         "fullName": "Alzbeta Pokorna",
+                         "role": [{"termin": "termin"}],
+                         "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
+                         }
+                    ],
+                    "itemPIDs": [{"identifier": "jej", "scheme": "DOI"}],
+                    "itemYear": "1970",
+                    "itemVolume": "volume",
+                    "itemIssue": "issue",
+                    "itemStartPage": "start",
+                    "itemEndPage": "konec",
+                    "itemPublisher": "publisher",
+                    "itemRelationType": [{"termin": "termin"}],
+                    "itemResourceType": [{"termin": "termin"}]
+                }],
+            "fundingReference": [
+                {"projectID": "kch", "projectName": "kk", "fundingProgram": "jeeej", "funder": [{"termin": "termin"}]}],
+            "version": "jeeej",
+            "geoLocation": [{
+                "geoLocationPlace": "place",
+                "geoLocationPoint": {"pointLongitude": 100, "pointLatitude": 0}
+            }],
+            "persistentIdentifiers": [{"identifier": "jej", "scheme": "DOI", "status": "requested"}],
+        }
+    }
     schema.validate(data, get_schema(), cls=AllOfDraft7Validator)
-    #todo:unique items
-    #todo: organization
+    # todo:unique items
+    # todo: organization
 
     # data = json.loads('{"these": {"abstract" : 1}}')
     # with pytest.raises(ValidationError):

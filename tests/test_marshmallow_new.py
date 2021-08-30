@@ -250,7 +250,13 @@ def test_contributor(app, db, taxonomy_tree):
                 'identifier': '0000-0002-1825-0097'
             }
         ],
-        'affiliation': AMU
+        'affiliation': AMU,
+        'role': [{'dataCiteCode': 'Supervisor',
+                  'is_ancestor': False,
+                  'level': 1,
+                  'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/supervisor'},
+                  'title': {'cs': 'supervizor',
+                            'en': 'supervisor'}}]
     })
 
 

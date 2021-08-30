@@ -224,7 +224,7 @@
           "minItems": 1,
           "uniqueItems": true
         },
-        "creator": {
+        "creators": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/authority"
@@ -568,7 +568,7 @@
       },
       "required": [
         "titles",
-        "creator",
+        "creators",
         "dateAvailable",
         "resourceType",
         "accessRights",

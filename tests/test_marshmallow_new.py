@@ -334,5 +334,5 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
             "geoLocationPlace": "place",
             "geoLocationPoint": {"pointLongitude": 100, "pointLatitude": 0}
         }],
-        "persistentIdentifiers": [{"identifier": "jej", "scheme": "DOI", "status": "requested"}],
+        "persistentIdentifiers": [{"identifier": "10.1038/nphys1170", "scheme": "doi", "status": "requested"}],
     })

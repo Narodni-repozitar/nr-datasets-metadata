@@ -11,6 +11,7 @@ from nr_datasets_metadata.marshmallow.subschemas.date import StringDateField, Da
 from nr_datasets_metadata.marshmallow.subschemas.funding import FundingReference
 from nr_datasets_metadata.marshmallow.subschemas.geo import GeoLocationSchema
 from nr_datasets_metadata.marshmallow.subschemas.person import CreatorSchema, ContributorSchema
+from nr_datasets_metadata.marshmallow.subschemas.pids import PersistentIdentifierSchema
 from nr_datasets_metadata.marshmallow.subschemas.related import RelatedItemSchema
 from nr_datasets_metadata.marshmallow.subschemas.taxonomy import SingleValuedMixin
 from nr_datasets_metadata.marshmallow.subschemas.titles import TitlesList
@@ -62,7 +63,7 @@ class DataSetMetadataSchemaV3(Schema):
     InvenioID = fields.String()
 
     persistentIdentifiers = fields.List(
-        fields.Nested(partial(IdentifierSchema, allowed_schemes=RDM_RECORDS_IDENTIFIERS_SCHEMES)),
+        fields.Nested(partial(PersistentIdentifierSchema, allowed_schemes=RDM_RECORDS_IDENTIFIERS_SCHEMES)),
         validate=[no_duplicates, not_empty]
         )
 

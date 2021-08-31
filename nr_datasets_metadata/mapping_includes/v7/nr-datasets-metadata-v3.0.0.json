@@ -1,6 +1,5 @@
 {
   "mappings": {
-    "type": "object",
     "properties": {
       "titles": {
         "type": "object",

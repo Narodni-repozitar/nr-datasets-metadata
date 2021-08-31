@@ -77,7 +77,7 @@
         }
       },
       "resourceType": {
-        "type": "keyword"
+        "type": "taxonomy-term"
       },
       "dateAvailable": {
         "type": "date"

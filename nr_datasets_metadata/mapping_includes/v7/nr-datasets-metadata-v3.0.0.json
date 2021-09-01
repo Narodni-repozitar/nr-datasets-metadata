@@ -15,60 +15,50 @@
       "creators": {
         "type": "object",
         "properties": {
-          "authority": {
+          "fullName": {
+            "type": "keyword"
+          },
+          "nameType": {
+            "type": "keyword"
+          },
+          "authorityIdentifiers": {
             "type": "object",
             "properties": {
-              "fullName": {
+              "identifier": {
                 "type": "keyword"
               },
-              "nameType": {
+              "scheme": {
                 "type": "keyword"
-              },
-              "authorityIdentifiers": {
-                "type": "object",
-                "properties": {
-                  "identifier": {
-                    "type": "keyword"
-                  },
-                  "scheme": {
-                    "type": "keyword"
-                  }
-                }
-              },
-              "affiliation": {
-                "type": "taxonomy-term"
               }
             }
+          },
+          "affiliation": {
+            "type": "taxonomy-term"
           }
         }
       },
       "contributors": {
         "type": "object",
         "properties": {
-          "authority": {
+          "fullName": {
+            "type": "keyword"
+          },
+          "nameType": {
+            "type": "keyword"
+          },
+          "authorityIdentifiers": {
             "type": "object",
             "properties": {
-              "fullName": {
+              "identifier": {
                 "type": "keyword"
               },
-              "nameType": {
+              "scheme": {
                 "type": "keyword"
-              },
-              "authorityIdentifiers": {
-                "type": "object",
-                "properties": {
-                  "identifier": {
-                    "type": "keyword"
-                  },
-                  "scheme": {
-                    "type": "keyword"
-                  }
-                }
-              },
-              "affiliation": {
-                "type": "taxonomy-term"
               }
             }
+          },
+          "affiliation": {
+            "type": "taxonomy-term"
           },
           "role": {
             "type": "taxonomy-term"
@@ -167,60 +157,50 @@
           "itemCreators": {
             "type": "object",
             "properties": {
-              "authority": {
+              "fullName": {
+                "type": "keyword"
+              },
+              "nameType": {
+                "type": "keyword"
+              },
+              "authorityIdentifiers": {
                 "type": "object",
                 "properties": {
-                  "fullName": {
+                  "identifier": {
                     "type": "keyword"
                   },
-                  "nameType": {
+                  "scheme": {
                     "type": "keyword"
-                  },
-                  "authorityIdentifiers": {
-                    "type": "object",
-                    "properties": {
-                      "identifier": {
-                        "type": "keyword"
-                      },
-                      "scheme": {
-                        "type": "keyword"
-                      }
-                    }
-                  },
-                  "affiliation": {
-                    "type": "taxonomy-term"
                   }
                 }
+              },
+              "affiliation": {
+                "type": "taxonomy-term"
               }
             }
           },
           "itemContributors": {
             "type": "object",
             "properties": {
-              "authority": {
+              "fullName": {
+                "type": "keyword"
+              },
+              "nameType": {
+                "type": "keyword"
+              },
+              "authorityIdentifiers": {
                 "type": "object",
                 "properties": {
-                  "fullName": {
+                  "identifier": {
                     "type": "keyword"
                   },
-                  "nameType": {
+                  "scheme": {
                     "type": "keyword"
-                  },
-                  "authorityIdentifiers": {
-                    "type": "object",
-                    "properties": {
-                      "identifier": {
-                        "type": "keyword"
-                      },
-                      "scheme": {
-                        "type": "keyword"
-                      }
-                    }
-                  },
-                  "affiliation": {
-                    "type": "taxonomy-term"
                   }
                 }
+              },
+              "affiliation": {
+                "type": "taxonomy-term"
               },
               "role": {
                 "type": "taxonomy-term"

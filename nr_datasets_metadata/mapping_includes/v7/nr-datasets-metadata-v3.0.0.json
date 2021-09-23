@@ -33,7 +33,7 @@
             }
           },
           "affiliation": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           }
         }
       },
@@ -58,15 +58,15 @@
             }
           },
           "affiliation": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           },
           "role": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           }
         }
       },
       "resourceType": {
-        "type": "taxonomy-term"
+        "type": "titled-taxonomy-term"
       },
       "dateAvailable": {
         "type": "date"
@@ -98,10 +98,10 @@
         "type": "multilingual"
       },
       "subjectCategories": {
-        "type": "taxonomy-term"
+        "type": "titled-taxonomy-term"
       },
       "language": {
-        "type": "taxonomy-term"
+        "type": "titled-taxonomy-term"
       },
       "notes": {
         "type": "keyword"
@@ -116,10 +116,10 @@
         "type": "multilingual"
       },
       "rights": {
-        "type": "taxonomy-term"
+        "type": "titled-taxonomy-term"
       },
       "accessRights": {
-        "type": "taxonomy-term"
+        "type": "titled-taxonomy-term"
       },
       "relatedItems": {
         "type": "object",
@@ -149,10 +149,10 @@
             "type": "keyword"
           },
           "itemRelationType": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           },
           "itemResourceType": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           },
           "itemCreators": {
             "type": "object",
@@ -175,7 +175,7 @@
                 }
               },
               "affiliation": {
-                "type": "taxonomy-term"
+                "type": "titled-taxonomy-term"
               }
             }
           },
@@ -200,10 +200,10 @@
                 }
               },
               "affiliation": {
-                "type": "taxonomy-term"
+                "type": "titled-taxonomy-term"
               },
               "role": {
-                "type": "taxonomy-term"
+                "type": "titled-taxonomy-term"
               }
             }
           },
@@ -233,7 +233,7 @@
             "type": "keyword"
           },
           "funder": {
-            "type": "taxonomy-term"
+            "type": "titled-taxonomy-term"
           }
         }
       },

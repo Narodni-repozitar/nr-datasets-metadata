@@ -37,7 +37,7 @@ jobs:
           stack-version: 7.6.0
       - name: Before install
         run: |
-          pip install --upgrade pip setuptools py
+          pip install --upgrade pip 'setuptools<58.0.0' py
           pip install twine wheel coveralls
           pip install poetry==1.0.10
           poetry config virtualenvs.create false

@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "techlib-nr-datasets-metadata"
-version = "3.0.5"
+version = "3.0.6"
 description = "Czech National Repository datasets data model."
 license = "MIT"
 keywords = ["Czech", "Nation", "Repository", "Invenio", "datasets"]

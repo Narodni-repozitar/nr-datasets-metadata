@@ -66,8 +66,13 @@ class AuthoritySchema(Schema):
             else:
                 return self.wrap_class(OrganizationSchema)().load(data, many=True, partial=partial, unknown=unknown)
 
-        name_type = data['nameType']
+        name_type = data.get('nameType')
+        if not name_type:
+            raise ValidationError(message=_('nameType is missing'))
+
         if name_type == 'Personal':
             return self.wrap_class(PersonSchema)().load(data, many=False, partial=partial, unknown=unknown)
-        else:
+        elif name_type == 'Organizational':
             return self.wrap_class(OrganizationSchema)().load(data, many=False, partial=partial, unknown=unknown)
+        else:
+            raise ValidationError(message=_('Unknown nameType. Must be one of "Personal", "Organizational"'))

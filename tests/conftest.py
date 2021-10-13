@@ -552,6 +552,10 @@ def new_datamodel_jschema_test():
 def fundingReference_test():
     return {"titles": [{"title": {"cs": "jej"}, "title_type": "mainTitle"}],
             "dateAvailable": "1970",
+            "publisher": [{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}],
             "abstract": {"cs": "test"},
             "fundingReference" : [{"projectID": "x", "projectName": "y", "fundingProgram": "z",
                                    "funder":[{'is_ancestor': False,
@@ -579,6 +583,10 @@ def base_json():
             "en": "test abstract",
             "cs": "testovaci abstrakt"
         },
+        "publisher": [{'is_ancestor': False,
+                          'level': 1,
+                          'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                          'title': {'cs': 'Anglicky'}}],
         "access": {
             "files": "restricted",
             "owned_by": [],
@@ -676,6 +684,10 @@ def base_json_dereferenced():
             "en": "test abstract",
             "cs": "testovaci abstrakt"
         },
+        "publisher": [{'is_ancestor': False,
+                       'level': 1,
+                       'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/languages/eng'},
+                       'title': {'cs': 'Anglicky'}}],
         "access": {
             "files": "restricted",
             "owned_by": [],

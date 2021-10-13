@@ -442,6 +442,18 @@ def test_whole_marshmallow(app, db, taxonomy_tree):
                      'level': 1,
                      'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/licenses/cc'},
                      'title': {'cs': 'Licence Creative Commons'}}],
+        'publisher' : [{'is_ancestor': False,
+                     'level': 1,
+                     'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/licenses/cc'},
+                     'title': {'cs': 'Licence Creative Commons'}},
+                       {'funderISVaVaICode': '123456789',
+                        'is_ancestor': False,
+                        'level': 1,
+                        'links': {'self': 'http://127.0.0.1:5000/2.0/taxonomies/test_taxonomy/ntk'},
+                        'title': {'cs': 'Národní technická knihovna',
+                                  'en': 'National library of '
+                                        'technology'}}
+                       ],
          'subjectCategories': [{'DateRevised': '2007-01-26T16:14:37',
                                 'is_ancestor': False,
                                 'level': 1,

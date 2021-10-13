@@ -109,6 +109,9 @@
       "abstract": {
         "type": "multilingual"
       },
+      "publisher": {
+        "type": "titled-taxonomy-term"
+      },
       "methods": {
         "type": "multilingual"
       },

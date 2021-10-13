@@ -35,9 +35,9 @@ class DataSetMetadataSchemaV3(Schema):
 
     keywords = fields.List(MultilingualStringV2(), validate=[no_duplicates])
 
-    subjectCategories = TaxonomyField(required=True)
+    subjectCategories = TaxonomyField(required=True, many=True)
 
-    language = TaxonomyField()
+    language = TaxonomyField(many=True)
 
     notes = fields.List(fields.String(), validate=[no_duplicates])
 
@@ -48,6 +48,8 @@ class DataSetMetadataSchemaV3(Schema):
     technicalInfo = MultilingualStringV2()
 
     rights = TaxonomyField()
+
+    publisher = TaxonomyField(required=True, many=True)
 
     accessRights = TaxonomyField(required=True)
 

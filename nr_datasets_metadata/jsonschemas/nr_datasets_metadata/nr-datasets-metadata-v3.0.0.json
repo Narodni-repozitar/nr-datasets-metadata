@@ -308,6 +308,12 @@
             "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual"
           }
         },
+        "publisher": {
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
+          "description": "taxonomie institutions",
+          "uniqueItems": true,
+          "minItems": 1
+        },
         "subjectCategories": {
           "description": "konspekt nebo jiné oborové třídění - poslouží jako podklad pro oborové clustery",
           "$comment": "PETRA TO DO: potřeba něco převzít/vytvořit vlastní taxonomii",
@@ -452,7 +458,8 @@
               "itemTitle",
               "itemCreators",
               "itemYear",
-              "itemResourceType"
+              "itemResourceType",
+              "itemRelationType"
             ]
           },
           "uniqueItems": true
@@ -560,7 +567,8 @@
         "resourceType",
         "accessRights",
         "abstract",
-        "subjectCategories"
+        "subjectCategories",
+        "publisher"
       ]
     }
   }

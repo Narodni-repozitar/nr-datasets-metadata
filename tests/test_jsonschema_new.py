@@ -38,6 +38,7 @@ def test_json(app):
             "dateAvailable": "1970",
             "resourceType": [{"termin": "termin"}],
             "accessRights": [{"termin": "termin"}],
+            "publisher": [{"termin": "termin"}],
             "abstract": {"cs": "kchc"},
             "subjectCategories": [{"termin": "termin"}]
         }
@@ -58,6 +59,7 @@ def test_json(app):
             ],
             "dateAvailable": "1970",
             "resourceType": [{"termin": "termin"}],
+            "publisher": [{"termin": "termin"}],
             "accessRights": [{"termin": "termin"}],
             "abstract": {"cs": "kchc"},
             "subjectCategories": [{"termin": "termin"}]
@@ -91,6 +93,7 @@ def test_json(app):
             "accessRights": [{"termin": "termin"}],
             "abstract": {"cs": "kchc"},
             "subjectCategories": [{"termin": "termin"}],
+            "publisher": [{"termin": "termin"}],
             "dateModified": "1999",
             "dateCollected": "2018-03",
             "dateCreated": "1996-10-12",

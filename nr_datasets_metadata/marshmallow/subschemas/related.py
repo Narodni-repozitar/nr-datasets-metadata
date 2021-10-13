@@ -27,5 +27,5 @@ class RelatedItemSchema(Schema):
 
     itemPublisher = SanitizedUnicode()
 
-    itemRelationType = TaxonomyField()
+    itemRelationType = TaxonomyField(required=True)
     itemResourceType = TaxonomyField(required=True)

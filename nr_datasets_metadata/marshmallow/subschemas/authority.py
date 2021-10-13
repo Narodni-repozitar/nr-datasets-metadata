@@ -38,7 +38,7 @@ class PersonSchema(AuthorityBaseSchema):
     name_type = SanitizedUnicode(data_key='nameType', attribute='nameType',
                                  choices=("Personal",))
 
-    affiliation = TaxonomyField(mixins=[TitledMixin], required=False)
+    affiliation = TaxonomyField(mixins=[TitledMixin], required=False, many=True)
 
 
 class OrganizationSchema(AuthorityBaseSchema, TaxonomySchema):

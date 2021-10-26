@@ -2,7 +2,7 @@
   "mappings": {
     "properties": {
       "titles": {
-        "type": "object",
+        "type": "nested",
         "properties": {
           "title": {
             "type": "multilingual"

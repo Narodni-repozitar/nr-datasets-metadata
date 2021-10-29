@@ -75,10 +75,10 @@
         "type": "date"
       },
       "dateCollected": {
-        "type": "date"
+        "type": "date_range"
       },
       "dateCreated": {
-        "type": "date"
+        "type": "date_range"
       },
       "dateValidTo": {
         "type": "date"

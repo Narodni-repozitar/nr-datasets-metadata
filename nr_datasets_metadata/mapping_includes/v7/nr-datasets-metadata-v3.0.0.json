@@ -75,9 +75,15 @@
         "type": "date"
       },
       "dateCollected": {
+        "type": "keyword"
+      },
+      "dateCollectedRange": {
         "type": "date_range"
       },
       "dateCreated": {
+        "type": "keyword"
+      },
+      "dateCreatedRange": {
         "type": "date_range"
       },
       "dateValidTo": {

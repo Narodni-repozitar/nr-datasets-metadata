@@ -2,12 +2,11 @@ from functools import partial
 
 from marshmallow import Schema, fields
 from marshmallow_utils.fields import EDTFDateString
-from marshmallow_utils.schemas import IdentifierSchema
 from oarepo_multilingual.marshmallow import MultilingualStringV2
 from oarepo_taxonomies.marshmallow import TaxonomyField
 
 from nr_datasets_metadata.marshmallow.constants import RDM_RECORDS_IDENTIFIERS_SCHEMES
-from nr_datasets_metadata.marshmallow.subschemas.date import StringDateField, DateWithdrawn
+from nr_datasets_metadata.marshmallow.subschemas.date import DateWithdrawn
 from nr_datasets_metadata.marshmallow.subschemas.funding import FundingReference
 from nr_datasets_metadata.marshmallow.subschemas.geo import GeoLocationSchema
 from nr_datasets_metadata.marshmallow.subschemas.person import CreatorSchema, ContributorSchema

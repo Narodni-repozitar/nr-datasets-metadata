@@ -21,7 +21,7 @@ def date_ranges_to_index(sender, json=None, record=None,
             else:
                 since, until = dates
 
-            json[dr] = {
+            json[f"{dr}Range"] = {
                 'gte': since,
                 'lte': until
             }

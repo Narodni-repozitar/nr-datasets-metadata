@@ -31,7 +31,7 @@ class DataSetMetadataSchemaV3(Schema):
     dateCreated = EDTFDateString() # Can be a date range
     dateCollected = EDTFDateString() # Can be a date range
     dateValidTo = EDTFDateString()
-    dateWithdrawn = EDTFDateString()
+    dateWithdrawn = fields.Nested(DateWithdrawn())
 
     keywords = fields.List(MultilingualStringV2(), validate=[no_duplicates])
 

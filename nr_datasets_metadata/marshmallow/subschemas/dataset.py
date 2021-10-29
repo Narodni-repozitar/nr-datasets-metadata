@@ -25,12 +25,12 @@ class DataSetMetadataSchemaV3(Schema):
 
     resourceType = TaxonomyField(mixins=[SingleValuedMixin])
 
-    dateAvailable = StringDateField()
+    dateAvailable = EDTFDateString()
 
-    dateModified = StringDateField()
-    dateCreated = StringDateField()
-    dateCollected = EDTFDateString()
-    dateValidTo = StringDateField()
+    dateModified = EDTFDateString()
+    dateCreated = EDTFDateString() # Can be a date range
+    dateCollected = EDTFDateString() # Can be a date range
+    dateValidTo = EDTFDateString()
     dateWithdrawn = fields.Nested(DateWithdrawn())
 
     keywords = fields.List(MultilingualStringV2(), validate=[no_duplicates])

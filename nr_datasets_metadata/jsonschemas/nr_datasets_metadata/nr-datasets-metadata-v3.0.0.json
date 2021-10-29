@@ -265,6 +265,7 @@
           "$comment": "týká se datasetu, nikoliv metadat!!!",
           "$comment1": "podle něj se bude řídit embargo, takže vyplní se datum, kdy mají být data v repozitáři veřejná (dataset access rights = open access); převzáno z datacite",
           "$comment2": "publicationYear, který je pro datacite povinný se bude generovat v oai-pmh z tohohle pole",
+          "$comment3": "pokud neni vyplnen uzivatelem, pri vypublikovani se automaticky nastavi na aktualni datum",
           "$ref": "#/definitions/date"
         },
         "dateModified": {
@@ -563,7 +564,6 @@
       "required": [
         "titles",
         "creators",
-        "dateAvailable",
         "resourceType",
         "accessRights",
         "abstract",

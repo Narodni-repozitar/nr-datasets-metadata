@@ -25,7 +25,7 @@ class DataSetMetadataSchemaV3(Schema):
 
     resourceType = TaxonomyField(mixins=[SingleValuedMixin])
 
-    dateAvailable = StringDateField(required=True)
+    dateAvailable = StringDateField()
 
     dateModified = StringDateField()
     dateCreated = StringDateField()

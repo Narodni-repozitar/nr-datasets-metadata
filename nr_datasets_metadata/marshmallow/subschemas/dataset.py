@@ -18,29 +18,6 @@ from nr_datasets_metadata.marshmallow.subschemas.titles import TitlesList
 from nr_datasets_metadata.marshmallow.subschemas.utils import no_duplicates, not_empty
 
 
-DATE_RANGE_FIELDS = ['dateCreated', 'dateCollected']
-
-
-# TODO: this needs to be made more generic before we can support more schemas
-def date_ranges_to_index(sender, json=None, record=None,
-                         index=None, doc_type=None, arguments=None, **kwargs):
-
-    for dr in DATE_RANGE_FIELDS:
-        if dr in json:
-            dates = json[dr].split('/', 1)
-            if len(dates) == 1:
-                since = until = dates[0]
-            else:
-                since, until = dates
-
-            json[dr] = {
-                'gte': since,
-                'lte': until
-            }
-
-    return json
-
-
 class DataSetMetadataSchemaV3(Schema):
     titles = TitlesList()
     creators = fields.List(fields.Nested(CreatorSchema()))

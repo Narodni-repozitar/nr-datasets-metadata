@@ -46,7 +46,7 @@ class DataSetMetadataSchemaV3(Schema):
 
     technicalInfo = MultilingualStringV2()
 
-    rights = TaxonomyField()
+    rights = TaxonomyField(many=True)
 
     publisher = TaxonomyField(required=True, many=True)
 

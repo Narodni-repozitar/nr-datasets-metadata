@@ -47,3 +47,11 @@ class ContributorSchema(AffiliationRequiredMixin, AuthoritySchema):
 
 class CreatorSchema(AffiliationRequiredMixin, AuthoritySchema):
     """Creator schema."""
+
+
+class ItemCreatorSchema(AuthoritySchema):
+    """RelatedItem creator schema."""
+
+
+class ItemContributorSchema(AuthoritySchema):
+    """RelatedItem contributor schema."""

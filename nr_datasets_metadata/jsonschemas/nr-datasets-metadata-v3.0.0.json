@@ -116,6 +116,7 @@
         "scheme": {
           "type": "string",
           "enum": [
+            "doi",
             "DOI",
             "Handle",
             "ISBN",

@@ -55,3 +55,4 @@ class ItemCreatorSchema(AuthoritySchema):
 
 class ItemContributorSchema(AuthoritySchema):
     """RelatedItem contributor schema."""
+    role = TaxonomyField(mixins=[TitledMixin])

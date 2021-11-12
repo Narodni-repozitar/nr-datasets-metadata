@@ -42,7 +42,7 @@ class AffiliationRequiredMixin(Schema):
 class ContributorSchema(AffiliationRequiredMixin, AuthoritySchema):
     """Contributor schema."""
 
-    role = TaxonomyField(mixins=[TitledMixin], required=True)
+    role = TaxonomyField(mixins=[TitledMixin])
 
 
 class CreatorSchema(AffiliationRequiredMixin, AuthoritySchema):

@@ -251,7 +251,7 @@
             ],
             "required": [
               "fullName",
-              "role"
+              "affiliation"
             ],
             "uniqueItems": true
           }

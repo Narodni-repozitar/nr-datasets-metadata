@@ -30,7 +30,7 @@ def test_json(app):
             "titles": [{"title": {"cs": "jeej"}, "titleType": "mainTitle"}],
             "creators": [
                 {"nameType": "Personal",
-                 "affiliatoin": [{"termin": "termin"}],
+                 "affiliation": [{"termin": "termin"}],
                  "fullName": "Alzbeta Pokorna",
                  "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]
                  }
@@ -82,7 +82,7 @@ def test_json(app):
             ],
             "contributors": [
                 {"nameType": "Personal",
-                 "affiliaton": [{"termin": "termin"}],
+                 "affiliation": [{"termin": "termin"}],
                  "fullName": "Alzbeta Pokorna",
                  "role": [{"termin": "termin"}],
                  "authorityIdentifiers": [{"identifier": "jej", "scheme": "orcid"}]

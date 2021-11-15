@@ -73,6 +73,8 @@ class AuthoritySchema(Schema):
         if name_type == 'Personal':
             return self.wrap_class(PersonSchema)().load(data, many=False, partial=partial, unknown=unknown)
         elif name_type == 'Organizational':
-            return self.wrap_class(OrganizationSchema)().load(data, many=False, partial=partial, unknown=unknown)
+            if not isinstance(data, (list, tuple)):
+                data = [data]
+            return self.wrap_class(OrganizationSchema)().load(data, many=True, partial=partial, unknown=unknown)
         else:
             raise ValidationError(message=_('Unknown nameType. Must be one of "Personal", "Organizational"'))

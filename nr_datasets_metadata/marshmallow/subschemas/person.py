@@ -21,20 +21,28 @@ from nr_datasets_metadata.marshmallow.subschemas.authority import AuthoritySchem
 class AffiliationRequiredMixin(Schema):
     def load(self, data, *, many=None, partial=None, unknown=None, **kwargs):
         data = super().load(data, many=many, partial=partial, unknown=unknown)
+        d = data
 
-        affilliation = data.get('affiliation', None)
-        if not affilliation:
-            raise ValidationError(
-                message=_('Required affiliation field not found')
-            )
-        if not isinstance(affilliation, (list, tuple)):
-            raise ValidationError(
-                message=_('affiliation must be a taxonomy')
-            )
-        if not len(affilliation):
-            raise ValidationError(
-                message=_('affiliation is not set up')
-            )
+        if not isinstance(d, (list, tuple)):
+            d = [d]
+
+        for dd in d:
+            affilliation = dd.get('affiliation', None)
+            nameType = dd.get('nameType', None)
+            if not affilliation:
+                if not nameType or (nameType != 'Organizational'):
+                    raise ValidationError(
+                        message=_('Required affiliation field not found')
+                    )
+            elif not isinstance(affilliation, (list, tuple)):
+                raise ValidationError(
+                    message=_('affiliation must be a taxonomy')
+                )
+            elif not len(affilliation):
+                if not nameType or (nameType != 'Organizational'):
+                    raise ValidationError(
+                        message=_('affiliation is not set up')
+                    )
 
         return data
 

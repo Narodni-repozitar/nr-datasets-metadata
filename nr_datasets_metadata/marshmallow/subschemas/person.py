@@ -20,7 +20,6 @@ from nr_datasets_metadata.marshmallow.subschemas.authority import AuthoritySchem
 
 class AffiliationRequiredMixin(Schema):
     def load(self, data, *, many=None, partial=None, unknown=None, **kwargs):
-        data = super().load(data, many=many, partial=partial, unknown=unknown)
         d = data
 
         if not isinstance(d, (list, tuple)):

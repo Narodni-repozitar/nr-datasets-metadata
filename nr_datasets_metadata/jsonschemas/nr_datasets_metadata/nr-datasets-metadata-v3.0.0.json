@@ -86,12 +86,7 @@
           "$ref": "#/definitions/authorityBase"
         },
         {
-          "type": "object",
-          "properties": {
-            "description": "taxonomie institutions",
-            "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-          },
-          "uniqueItems": true
+          "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
         }
       ]
     },

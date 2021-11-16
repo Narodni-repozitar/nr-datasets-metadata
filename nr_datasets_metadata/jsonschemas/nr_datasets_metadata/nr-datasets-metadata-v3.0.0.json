@@ -236,12 +236,7 @@
                 "$ref": "#/definitions/authority"
               },
               {
-                "type": "object",
-                "properties": {
-                  "role": {
-                    "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-                  }
-                }
+                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
               }
             ],
             "required": [

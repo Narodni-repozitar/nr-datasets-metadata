@@ -81,13 +81,17 @@
     "organization": {
       "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
       "$comment": "Alzp: Name of the property? Should be object?",
-      "allOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/authorityBase"
         },
         {
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
         }
+      ],
+      "required": [
+        "fullName",
+        "nameType"
       ]
     },
     "authority": {

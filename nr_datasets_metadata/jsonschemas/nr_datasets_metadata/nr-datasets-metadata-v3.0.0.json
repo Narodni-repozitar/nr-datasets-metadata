@@ -231,20 +231,13 @@
         "contributors": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/authority"
-              },
-              {
-                "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
-              }
-            ],
-            "required": [
-              "fullName",
-              "affiliation"
-            ],
-            "uniqueItems": true
-          }
+            "$ref": "#/definitions/authority"
+          },
+          "required": [
+            "fullName",
+            "affiliation"
+          ],
+          "uniqueItems": true
         },
         "resourceType": {
           "$comment": "MARSHMALLOW: required pouze 1 hodnota z taxonomie, tj. min 1, max 1",

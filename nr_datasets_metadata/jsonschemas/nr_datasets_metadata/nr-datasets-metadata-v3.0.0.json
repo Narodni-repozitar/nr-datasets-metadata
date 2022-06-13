@@ -67,7 +67,7 @@
             },
             "affiliation": {
               "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
-              "description": "taxonomie institutions",
+              "description": "řízeno taxonomií institutions",
               "$comment": "povinná pro pole creator a contributor (autory a přispěvatele popisovaného objektu/datasetu) v marshmallow"
             }
           },
@@ -79,8 +79,6 @@
       ]
     },
     "organization": {
-      "$comment": "TODO Petra: upravit taxonomii institutions - add nameType organizational + rename pole s názvem institutce na fullName",
-      "$comment": "Alzp: Name of the property? Should be object?",
       "anyOf": [
         {
           "$ref": "#/definitions/authorityBase"
@@ -105,7 +103,7 @@
       ]
     },
     "objectPIDs": {
-      "description": "Persistent identifier/s of object",
+      "description": "Persistent identifier/s of the object",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -115,7 +113,6 @@
         "scheme": {
           "type": "string",
           "enum": [
-            "doi",
             "DOI",
             "Handle",
             "ISBN",
@@ -257,7 +254,7 @@
           "$ref": "#/definitions/date"
         },
         "dateModified": {
-          "description": "The date of the last update to the resource, not metadata",
+          "description": "The date of the last update to the resource/object/work, not metadata",
           "$comment": "týká se datasetu, nikoliv metadat!!!",
           "$comment1": "neukazuje se ve vkládacím formuláři. jen při editaci záznamu!",
           "$ref": "#/definitions/date"
@@ -304,9 +301,7 @@
           "minItems": 1
         },
         "subjectCategories": {
-          "description": "konspekt nebo jiné oborové třídění - poslouží jako podklad pro oborové clustery",
-          "$comment": "PETRA TO DO: potřeba něco převzít/vytvořit vlastní taxonomii",
-          "$comment": "Alzp: Name changed to categories",
+          "description": "oborové třídění podle Frascati Manuálu, viz http://dx.doi.org/10.1787/9789264239012-4-en ; poslouží jako podklad pro oborové clustery",
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
           "minItems": 1,
           "uniqueItems": true
@@ -326,22 +321,22 @@
           "uniqueItems": true
         },
         "abstract": {
-          "description": "Multilingual abstract description for record (may contain HTML).",
+          "description": "Multilingual abstract description of the object (may contain HTML).",
           "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
           "uniqueItems": true
         },
         "methods": {
-          "description": "Multilingual methodology employed for the study or research.(may contain HTML)",
+          "description": "Multilingual methodology employed for the study or research (may contain HTML).",
           "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
           "uniqueItems": true
         },
         "technicalInfo": {
-          "description": "Multilingual detailed information that may be associated with design, implementation, operation, use, and/or maintenance of a process or system.(may contain HTML)",
+          "description": "Multilingual detailed information that may be associated with design, implementation, operation, use, and/or maintenance of a process or system (may contain HTML).",
           "$ref": "../multilingual-v2.0.0.json#/definitions/multilingual",
           "uniqueItems": true
         },
         "rights": {
-          "description": "Any license or copyright information for this resource. Taxonomy field.",
+          "description": "Any license or copyright information for this resource. Taxonomy driven field.",
           "$comment": "zkontrolovat, jestli naše struktura je dobře exportovatelná do DATACITE",
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term",
           "uniqueItems": true
@@ -353,15 +348,14 @@
           "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
         },
         "relatedItems": {
-          "description": "pole pro linkdata, provázání částí a celku nebo jinak přidružených dokumentů a datasetů. předpokládá se u dizertací vydaných jako knih, příspěvky ve sborníku na sborník, článek na časopis, kapitola na knihu, recenze na článek nebo knihu, dataset na článek,...",
-          "$comment": "V BUDOUCNOSTI: bylo by dobré naškálovat pro některé related typy dokumentů různá povinná pole - př. pokud je related item book, tak chci isbn. pokud časopis chci číslo, ročník; viz komenty níže.",
+          "description": "pole pro linkdata, provázání částí a celku nebo jinak přidružených dokumentů a datasetů. př. u dizertací vydaných jako knih, příspěvky ve sborníku odkazují na sborník, článek na časopis, kapitola na knihu, recenze na článek nebo knihu, dataset na článek,...",
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
               "itemTitle": {
-                "description": "název propojeného dokumentu - časopisu, knihy, článku u recenze, ...",
+                "description": "originální název propojeného dokumentu - časopisu, knihy, článku u recenze, ...",
                 "type": "string"
               },
               "itemCreators": {
@@ -413,30 +407,26 @@
                 "format": "URL"
               },
               "itemYear": {
-                "$comment": "při slučování modelů se bude muset doplnit: if itemResourceType = dataset then use dateAvailable, else use dateIssued",
+                "$comment": "při slučování modelů pro data a dokumenty se bude muset doplnit: if itemResourceType = dataset then use dateAvailable, else use dateIssued",
                 "$ref": "#/definitions/date"
               },
               "itemVolume": {
-                "$comment": "if itemResourceType = journal then required",
                 "type": "string"
               },
               "itemIssue": {
-                "$comment": "if itemResourceType = journal then required",
                 "type": "string"
               },
               "itemStartPage": {
-                "$comment": "if itemResourceType = journal/book then required",
                 "type": "string"
               },
               "itemEndPage": {
-                "$comment": "if itemResourceType = journal/book then required",
                 "type": "string"
               },
               "itemPublisher": {
                 "type": "string"
               },
               "itemRelationType": {
-                "description": "typ vztahu k původnímu popisovanému dok.",
+                "description": "typ vztahu odkazovaného zdroje/objektu k původnímu popisovanému zdroji (pro pilot k datasetu).",
                 "$ref": "../taxonomy-v2.0.0.json#/definitions/Term"
               },
               "itemResourceType": {
@@ -454,8 +444,8 @@
           "uniqueItems": true
         },
         "fundingReferences": {
-          "description": "informace o přidruženém projektu",
-          "$comment": "u českých projektů na základě prvních dvou znaků v řetězci s identifikátorem projektu lze přiřadit poskytovatele",
+          "description": "informace o financování výsledku/zdroje - návaznost na projekty",
+          "$comment": "Do budoucna lze doplňovat na základě čísla projektu z jiných databází. u českých projektů na základě prvních dvou znaků v řetězci identifikátu projektu lze přiřadit poskytovatele",
           "type": "array",
           "items": {
             "type": "object",
@@ -482,12 +472,10 @@
           "uniqueItems": true
         },
         "version": {
-          "$comment": "hodnota ve formuláři není editovatelná. při uploadu dat nutnost změnit verzi, pokud data ještě nebyla 1.0.0",
           "type": "string"
         },
         "geoLocations": {
           "type": "array",
-          "$comment": "Alzp: Name of required value changed from place to geoLocationPlace",
           "items": {
             "type": "object",
             "properties": {
